@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#define EarthR 6372.795
+#define PI 3.14159266
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	double x1, y1, x2, y2, d;
+
+	in >> x1 >> y1;
+	in >> x2 >> y2;
+
+	x1 = x1 * PI / 180;
+	x2 = x2 * PI / 180;
+	y1 = y1 * PI / 180;
+	y2 = y2 * PI / 180;
+
+	d = EarthR * acos(sin(x1)*sin(x2)+cos(x1)*cos(x2)*cos(y2-y1));
+
+	out.setf(ios::fixed);
+	out.precision(0);
+	out << d << endl;
+
+	return 0;
+}

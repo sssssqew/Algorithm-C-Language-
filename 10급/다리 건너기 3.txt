@@ -1,0 +1,163 @@
+#include <iostream>
+#include <fstream>
+#define PeopleNum 4 
+using namespace std;
+
+int main()
+{
+	int hiker[PeopleNum];
+	int hiker2[PeopleNum - 1];
+	int firstGoTable[PeopleNum][PeopleNum];
+	int secondGoTable[PeopleNum-1][PeopleNum-1];
+	int firstGone, last, lastCome;
+	int i, j;
+	int time = 0, minTime = 0;
+	int mini = 0, minj = 0;
+	int max;
+	hiker[0] = 10; hiker[1] = 1; hiker[2] = 5; hiker[3] = 2;
+	//calculate max value 
+	i = 0;
+    max = hiker[0];
+	do{
+		if(hiker[i] > max)
+			max = hiker[i];
+		i++;
+	}while(i < PeopleNum);
+	//initialize time table 
+	i = 0;
+	do{
+		j = 0;
+		do{
+			firstGoTable[i][j] = 0;
+			if(i < PeopleNum -1 && j < PeopleNum - 1)
+				secondGoTable[i][j] = 0;
+			j++;
+		}while(j < PeopleNum);
+		i++;
+	}while(i < PeopleNum);
+    //calculate time to go first and put into table  
+	i = 0;
+	do{
+		j = i + 1;
+		do{
+			if(hiker[i] > hiker[j])
+				firstGoTable[i][j] = hiker[i];
+			else
+				firstGoTable[i][j] = hiker[j];
+			j++;
+		}while(j < PeopleNum);
+		i++;
+	}while(i < PeopleNum - 1);
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+    
+    //calculate minimum time to go first and obtain index
+    time = max;
+	i = 0;
+	do{
+		j = 0;
+		do{
+			if(firstGoTable[i][j] != 0){
+				if(firstGoTable[i][j] < time){
+					time = firstGoTable[i][j];
+				    mini = i;
+					minj = j;
+				}
+			}
+			j++;
+		}while(j < PeopleNum);
+		i++;
+	}while(i < PeopleNum);
+	//calculate time to come back first 
+    if(hiker[mini] < hiker[minj]){
+		time += hiker[mini];
+		hiker2[0] = hiker[mini];
+		firstGone = hiker[minj];
+	}else{
+		time += hiker[minj];
+		hiker2[0] = hiker[minj];
+		firstGone = hiker[mini];
+	}
+    //make hiker2 except the people which has gone over first      
+	int cnt = 1;
+	i = 0;
+	do{
+		if(i != mini && i != minj){
+			hiker2[cnt] = hiker[i];
+			cnt++;
+		}
+		i++;
+	}while(i < PeopleNum);
+
+	//make time table to go second time
+	i = 0;
+	do{
+		j = i + 1;
+		do{
+			if(hiker2[i] > hiker2[j])
+				secondGoTable[i][j] = hiker2[i];
+			else
+				secondGoTable[i][j] = hiker2[j];
+			j++;
+		}while(j < PeopleNum - 1);
+		i++;
+	}while(i < PeopleNum - 2);
+    //store time in the middle of calculating
+    minTime = time;
+	//calculate minimum time to go second time 
+	time = max;
+	i = 0;
+	do{
+		j = 0;
+		do{
+			if(secondGoTable[i][j] != 0){
+				if(secondGoTable[i][j] < time){
+					time = secondGoTable[i][j];
+				    mini = i;
+					minj = j;
+				}
+			}
+			j++;
+		}while(j < PeopleNum - 1);
+		i++;
+	}while(i < PeopleNum - 1);
+
+	minTime += time;
+	//estimate time to come back second time 
+	if(hiker2[mini] < hiker2[minj]){
+		time = hiker2[mini];
+		if(time < firstGone){
+			minTime += time;
+			lastCome = time;
+		}else{
+			minTime += firstGone;
+			lastCome = firstGone;
+		}
+	}else{
+		time = hiker2[minj];
+		if(time < firstGone){
+			minTime += time;
+			lastCome = time;
+		}else{
+			minTime += firstGone;
+			lastCome = firstGone;
+		}
+	}
+	//select the people who has to go over last 
+    i = 0;
+	do{
+		if(i != mini && i != minj)
+			last = hiker2[i];
+		i++;
+	}while(i < PeopleNum - 1);
+    //calculate time to go over last 
+	if(last < lastCome)
+		minTime += lastCome;
+	else
+		minTime += last;
+
+	out << minTime << endl;
+	return 0;
+}
+	

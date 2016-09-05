@@ -1,0 +1,106 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int findMax(int n, int max);
+int findMin(int n, int min);
+int findLcm(int n, int max, const int* iptr);
+int findGcd(int n, int max, int min, const int* iptr);
+
+int main(){
+	int n, d, i, LCM, GCD;
+	int min, max;
+	int* iPtr;
+
+	min = pow(10,8);
+	max = pow(10,-8);
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	//assign dynamic array 
+	iPtr = (int*) malloc(sizeof(int)*n);
+
+	for(i=1 ; i<=n ; i++){
+		in >> d;
+		//store data in dynamic array 
+		*(iPtr + (i - 1)) = d;
+		max = findMax(d,max);
+		min = findMin(d,min);
+	}
+
+	cout << "max : " << max << endl;
+	cout << "min : " << min << endl;
+
+	LCM = findLcm(n, max, iPtr);
+	GCD = findGcd(n, max, min, iPtr);
+
+	cout << "LCM : " << LCM << endl;
+	cout << "GCD : " << GCD << endl;
+
+	return 0;
+}
+
+int findMax(int n, int max){
+	if(n > max)
+		max = n;
+	return max;
+}
+
+int findMin(int n, int min){
+	if(n < min)
+		min = n;
+	return min;
+}
+
+int findLcm(int n, int max, const int* iptr){
+	int lcm, det, i;
+	lcm = 0;
+
+	//det = 0 means lcm is common 
+	//multiple of all numbers
+	do{
+		lcm += max;
+		det = 0;
+		for(i=1 ; i<=n ; i++){
+			if(lcm % *(iptr+(i-1)) != 0)
+				det++;
+		}	 
+	}while(det);
+
+	return lcm;
+}
+
+int findGcd(int n, int max, int min, const int* iptr){
+	int gcd, det, i;
+	//select initial value to be gcd
+	//this code reduce calculation
+	if(max != min){
+		if(max >= min*2)
+			gcd = min;
+		else
+			gcd = max/2;
+	}else{
+		gcd = min;
+	}
+
+	//det = 0 means gcd is common 
+	//divisor of all numbers
+	do{
+		det = 0;
+		for(i=1 ; i<=n ; i++){
+			if(*(iptr+(i-1)) % gcd != 0)
+				det++;
+		}
+		if(det)
+			gcd--;
+		else
+			break;
+	}while(true);
+
+	return gcd;
+}

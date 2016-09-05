@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, j, k, n;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	cin >> n;
+
+	for(i=2 ; i<=9 ; i+=n){
+		for(j=1 ; j<=9 ; j++){
+			for(k=i ; k<=i+(n-1) ; k++){
+				if(k <= 9){
+					out.width(2);
+					out << k;
+					out << " * ";
+					out.width(2);
+					out << j;
+					out << " = ";
+					out.width(3);
+					out << k*j;
+					out << "   ";
+				}
+			}
+			out << endl;
+		}
+		out << endl;
+	}
+	
+	return 0;
+}
+

@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int dNum, tNum, sNum;
+	int i, j, n;
+	n = 0; tNum = 0; sNum = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> dNum;
+
+	for(i=1 ; i<=dNum; i++){
+		sNum += i * i;
+	}
+
+	for(i=1 ; i<=dNum; i++){
+		for(j=1 ; j<=i ; j++){
+			n += j;
+		}
+		tNum += n;
+		n = 0;
+	}
+	out << sNum << " " << tNum << endl;
+
+	return 0;
+}
+

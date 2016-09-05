@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int propDivSum(int n);
+
+int main(){
+	int n, i;
+	int y, m, d;
+	int j, k, eq, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> y >> m >> d;
+		if(m == 1 || m == 2){
+			m = m + 12;
+			y = y - 1;
+		}
+		j = y / 100;
+		k = y % 100;
+		eq = d + floor(26*(m+1)/10.0) + k + 
+			floor(k/4.0) + floor(j/4.0) - 2*j;
+		eq = eq % 7;
+		if(eq < 0)
+			eq = eq + 7;
+		if(eq == 1)
+			cnt++;
+	}
+
+	out << cnt << endl;
+	return 0;
+}
+
+
+

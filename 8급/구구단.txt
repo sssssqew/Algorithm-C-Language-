@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+    
+	do{
+		in >> n;
+	}while(n < 2 || n > 9);
+
+	for(int i = 2;i <= 9;i++){
+		out << n << "*" << i << "=" << n * i << endl;
+	}
+
+	return 0;
+}
+
+	
+   
+
+
+
+
+

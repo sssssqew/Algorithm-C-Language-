@@ -1,0 +1,69 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int a, b, c, d = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> a >> b >> c;
+		if((a >= 1 && a <= 100) && (b >= 1 && b <= 100) && (c >= 1 && c <= 100))
+			break;
+	}while(true);
+N0:
+	if(b > a){
+N1:
+		if(c > a){
+			d += 100;
+N2:
+			if(c > b){
+				d += 50;
+			}else if(c < b){
+				d -= 50;
+			}else{
+				c = c + 5;
+				goto N2;
+			}
+		}else if(c < a){
+			d -= 100;
+		}else{
+			c = c + 5;
+			goto N1;
+		}
+	}else if(b < a){
+N3:
+		if(c > a){
+			d += 100;
+		}else if(c < a){
+			d -= 100;
+N4:
+			if(c > b){
+				d += 50;
+			}else if(c < b){
+				d -= 50;
+			}else{
+				c = c + 5;
+				goto N4;
+			}
+		}else{
+			c = c + 5;
+			goto N3;
+		}
+	}else{
+		b = b + 5;
+		goto N0;
+	}
+	out << d << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+
+#define TOTAL 150
+#define COIN 100
+using namespace std;
+
+int main(){
+	int totalEgg, receivedMoney, price, compensation;
+	int originMoney, fragiledEgg;
+	 
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> totalEgg >> receivedMoney >> price >> compensation;
+	//하나도 깨뜨리지 않고 배달했을 때 받는 돈 
+	originMoney = totalEgg * price;
+	// price + compensation : 하나 깨뜨릴때마다 날라가는 돈 
+	// originMoney - receivedMoney : 날라간 차액 
+    fragiledEgg = (originMoney - receivedMoney)/(price + compensation);
+
+	cout << fragiledEgg << endl;
+	out << fragiledEgg << endl;
+	return 0;
+}

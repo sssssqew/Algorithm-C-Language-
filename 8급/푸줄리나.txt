@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int birth, num, life, year, i;
+	double s, total;
+	s = 1; total = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> birth >> num >> life >> year;
+
+	for(i=birth ; i<=year ; i+=birth){
+		s *= num;
+		if(i + life > year)
+			total += s;
+		
+	}
+
+	out << total << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

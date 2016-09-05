@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int prev, current, next;
+	int n, i;
+	current = 0; next = 1;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		prev = next - current;
+		next = current;
+		current = prev;
+	}
+	out << prev << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

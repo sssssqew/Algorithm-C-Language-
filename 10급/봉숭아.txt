@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	int num,s;
+    int cnt,data;
+
+	s = 0; cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> num;
+
+	do{
+		in >> data;
+		s += data;
+		cnt++;
+	}while(cnt < num);
+
+	out << s << endl;
+
+	return 0;
+}
+	

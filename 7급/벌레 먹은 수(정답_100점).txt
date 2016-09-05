@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int i, d, w, A, B, tmp;
+	double s = 0;
+	
+	in >> A >> B;
+
+	for(i=A ; i<=B ; i++){
+		w = 0; tmp = i;
+		do{
+			d = tmp % 10;
+			tmp = tmp / 10;
+
+			if(d == 0){
+				w = 0;
+			}else{
+				if(w == 0)
+					w = 1;
+				else
+					w = w * 10;
+			}
+
+			s += d * w;
+		}while(tmp != 0);
+	}
+	
+	out.setf(ios::fixed);
+	out.precision(0);
+	out << s << endl;
+
+	return 0;
+}
+

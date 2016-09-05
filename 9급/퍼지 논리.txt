@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+#define Q_hour 30
+#define hour2min 60
+#define shift 50 
+using namespace std;
+
+double largeNum(double x, double y);
+double smallNum(double x, double y);
+
+int main(){
+	double A, B, ret1, ret2, ret3;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> A >> B;
+		if((A >= 0 && A <= 1) && (B >= 0 && B <= 1)){
+			ret1 = largeNum(1 - A, B);
+			ret2 = largeNum(1 - B, A);
+            ret3 = smallNum(ret1, ret2);
+			break;
+		}
+	}while(true);
+
+	out << ret3 << endl;
+	
+    in.close();
+	out.close();
+
+	return 0;
+}
+
+double largeNum(double x, double y){
+	if(x >= y)
+		return x;
+	else
+		return y;
+}
+
+double smallNum(double x, double y){
+	if(x <= y)
+		return x;
+	else
+		return y;
+}

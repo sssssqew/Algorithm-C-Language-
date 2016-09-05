@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, n, rN, cN, el;
+	int *A;
+
+	in >> n;
+	in >> rN >> cN;
+
+	//행렬이 여러개이므로 각 요소를 더해주기 위해 초기화 
+	A = (int*)calloc(rN*cN, sizeof(int));
+
+	//행렬은 행과 열이 있지만 저장할 때는 순서대로 한줄에 함
+	//순서대로 저장하면 대응되는 행렬의 요소들끼리 더해짐 
+	for(i=0 ; i<n ; i++){
+		for(j=0 ; j<rN*cN ; j++){
+			in >> el;
+			A[j] += el;
+		}
+	}
+	//출력시 (i, j) 요소는 (i * 열의 수 + j)
+	for(i=0 ; i<rN ; i++){
+		for(j=0 ; j<cN ; j++){
+			out << A[i*cN+j] << " ";
+		}
+		out << endl;
+	}
+	free(A);
+
+	return 0;
+}
+

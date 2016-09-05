@@ -1,0 +1,80 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, j, n;
+	string shape;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	cout << "줄 수를 입력하세요 : ";
+	cin >> n;
+
+	cout << "삼각형 모양을 입력하세요. (RD, BU 등) : ";
+	cin >> shape;
+
+	if(shape == "LU" || shape == "lu"){
+		for(i=1 ; i<=n ; i++){
+			for(j=1 ; j<=n+1-i ; j++){
+				cout << "*";
+			}
+			cout << endl;
+		}
+	}else if(shape == "LD" || shape == "ld"){
+		for(i=1 ; i<=n ; i++){
+			for(j=1 ; j<=i; j++){
+				cout << "*";
+			}
+			cout << endl;
+		}
+	}else if(shape == "RU" || shape == "ru"){
+		for(i=1 ; i<=n ; i++){
+			for(j=1; j<=i-1 ; j++){
+				cout << " ";
+			}
+			for(j=1 ; j<=n+1-i ; j++){
+				cout << "*";
+			}
+			cout << endl;
+		}
+	}else if(shape == "RD" || shape == "rd"){
+		for(i=1 ; i<=n ; i++){
+			for(j=1 ; j<=n-i ; j++){
+				cout << " ";
+			}
+			for(j=1 ; j<=i ; j++){
+				cout << "*";
+			}
+			cout << endl;
+		}
+	}else if(shape == "BU" || shape == "bu"){
+		for(i=1 ; i<=n ; i++){
+			for(j=1 ; j<=i-1 ; j++){
+				cout << " ";
+			}
+			for(j=1 ; j<=2*(n+1-i)-1 ; j++){
+				cout << "*";
+			}
+			cout << endl;
+		}
+	}else if(shape == "BD" || shape == "bd"){
+		for(i=1 ; i<=n ; i++){
+			for(j=1 ; j<=n-i ; j++){
+				cout << " ";
+			}
+			for(j=1 ; j<=2*i-1 ; j++){
+				cout << "*";
+			}
+			cout << endl;
+		}
+
+	}else{
+		cout << "삼각형 모양이 아닙니다. 다시 입력하세요. " << endl;
+	}
+
+	return 0;
+}
+

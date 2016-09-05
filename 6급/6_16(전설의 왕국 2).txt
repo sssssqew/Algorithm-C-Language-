@@ -1,0 +1,54 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, word, len, n;
+	string name, temp;
+	char ch;
+
+	in >> n;
+	string* nStr = (string*) calloc(n, sizeof(string));
+	string* oStr = (string*) calloc(n, sizeof(string));
+
+	for(word=0 ; word<n ; word++){
+		in >> name;
+		oStr[word] = name;
+		len = name.length();
+		for(i=0 ; i<len ; i++){
+			if(name[i] >= 'a' && name[i] <= 'z')
+				name[i] = name[i] - 'a' + 'A';
+		}
+		for(i=0 ; i<len-1 ; i++){
+			for(j=i+1 ; j<len ; j++){
+				if(name[i] > name[j]){
+					ch = name[i];
+					name[i] = name[j];
+					name[j] = ch;
+				}
+			}
+		}
+		nStr[word] = name;
+	}
+	
+	for(i=0 ; i<n-1 ; i++){
+		for(j=i+1 ; j<n ; j++){
+			if(nStr[i] > nStr[j]){
+				temp = nStr[i]; nStr[i] = nStr[j]; nStr[j] = temp;
+				temp = oStr[i]; oStr[i] = oStr[j]; oStr[j] = temp;
+			}
+		}
+	}
+	for(word=0 ; word<n ; word++)
+		out << oStr[word] << endl;
+
+	free(oStr);
+	free(nStr);
+
+	return 0;
+}
+	

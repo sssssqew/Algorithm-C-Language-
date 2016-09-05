@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#define limit 12000
+using namespace std;
+
+int main(){
+	int increase, visit, n;
+	int i, init = 0, order = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> increase >> visit >> n;
+
+	for(i=1 ; ; i++){
+		order++;
+
+		if(i == n)
+			break;
+
+		if(i % visit == 0){
+			i = i + increase - visit;
+			if(i >= limit){
+				init += visit;
+				i = init;
+			}
+		}
+	}
+	out << order << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define size 100
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int rot[size][size];
+	int i, j, n, col;
+
+	in >> n;
+
+	for(i=0 ; i<n ; i++){
+		for(j=0 ; j<n ; j++){
+			if(i==0) rot[i][j] = j+1;
+			cout << rot[i][j] << " ";
+
+			col = (j+i+1) % n;
+			rot[i+1][col] = j+1;
+		}
+		cout << endl;
+	}
+
+	return 0;
+}

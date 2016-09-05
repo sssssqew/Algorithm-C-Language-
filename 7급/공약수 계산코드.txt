@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int n1, n2, i, j, temp, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	cin >> n1 >> n2;
+
+	if(n1 < n2)
+		temp = n1;
+	else
+		temp = n2;
+
+	for(i=1 ; i<=temp ; i++){
+		if(n1 % i == 0 && n2 % i == 0)
+			cout << i << " ";
+	}
+	cout << endl;
+
+	return 0;
+}

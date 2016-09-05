@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int n, r, p, score = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> p;
+		if(p == 18 || p == 25)
+			break;
+	}while(true);
+	do{
+		in >> n;
+		if(n >= 1 && n <= 30)
+			break;
+	}while(true);
+
+	int i=0;
+	do{
+		in >> r;
+		if(p == 18){
+			if(r >=0 && r <= 20)
+				score += 10 - (r / 2);
+		}else if(p == 25){
+			if(r >=0 && r <= 30)
+				score += 10 - (r / 3);
+		}
+		i++;
+	}while(i < n);
+
+	out << score << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

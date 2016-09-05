@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	int age, remain3, remain5, remain7;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> remain3 >> remain5 >> remain7;
+
+	age = remain3 * 70 + remain5 * 21 + remain7 * 15;
+
+	if(age != 0){
+		if(age < 105)
+			age += 0;
+		else if(age <= 210)
+			age -= 105;
+		else
+			age -= 210;
+		
+		out << age << endl;
+	}
+
+	return 0;
+}
+	

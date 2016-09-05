@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int i, max, cnt, pick, temp;
+	int n, data;
+	max = 0; 
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+	for(i=1 ; i<=n ; i++){
+		in >> data;
+		temp = data;
+		cnt = 0;
+		while(temp != 0){
+			if(temp % 2 == 1)
+				cnt++;
+			temp = temp / 2;
+		}
+		if(cnt > max){
+			max = cnt;
+			pick = data;
+		}else if(cnt == max){
+			if(pick > data) 
+				pick = data;
+		}
+	}
+	out << pick << endl;
+
+	return 0;
+}

@@ -1,0 +1,47 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+#define sheepPrice 10
+using namespace std;
+
+int main(){
+	int camelNum, sheepNum, goatPrice, camelMoney, dogPrice;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	camelNum = 0;
+	do{
+		camelMoney = camelNum * camelNum;
+		if(camelMoney > 30){
+			sheepNum = camelMoney / sheepPrice;
+			goatPrice = camelMoney % sheepPrice;
+			if(sheepNum%2 != 0){
+				cout << camelMoney << endl;
+				cout << sheepNum << endl;
+				cout << goatPrice << endl << endl;
+				break;
+			}
+		}
+		camelNum++;
+	}while(true);
+
+	dogPrice = 0;
+	do{
+		if(sheepPrice - dogPrice == goatPrice + dogPrice)
+			break;
+		dogPrice++;
+	}while(true);
+
+	out << dogPrice << endl;
+
+
+
+	
+	
+	in.close();
+	out.close();
+
+	return 0;
+}

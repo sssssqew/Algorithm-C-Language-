@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	int n,s,p;
+	int cnt;
+
+	s = 0; cnt = 0; p = 1;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	do{
+		cnt++;
+		s += cnt * p;
+		p = -p;
+	}while(cnt < n);
+
+	out << s << endl;
+
+	return 0;
+}
+	

@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, o;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	o = n*n*n - (n-1)*(n-1);
+
+	out << o << endl;
+	
+	in.close();
+	out.close();
+
+	return 0;
+}
+

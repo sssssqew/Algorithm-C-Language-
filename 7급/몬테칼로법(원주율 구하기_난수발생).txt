@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+#define trial 1000000
+using namespace std;
+
+int bitCnt(int num);
+
+int main(){
+	double x, y, sector, total;
+	int i, j, cnt;
+	total = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	srand((unsigned)time(NULL));
+
+	for(j=1 ; j<=10 ; j++){
+		cnt = 0;
+		for(i=1 ; i<=trial ; i++){
+			x = rand()/32766.0;
+			y = rand()/32766.0;
+			//if(i % 10000 == 0)
+				//cout << x << " " << y << endl;
+			if(x*x + y*y <= 1)
+				cnt++;
+		}
+		sector = (double)cnt/trial;
+		//cout << 4.0 * sector << endl;
+		total += 4.0 * sector;
+	}
+	cout << "PI : " << total / 10 << endl;
+	return 0;
+}

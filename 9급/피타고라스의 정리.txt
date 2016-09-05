@@ -1,0 +1,26 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int a, b, c, eq;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	
+	in >> a >> b >> c;
+
+	eq = a * a + b * b;
+
+	if(eq == c * c)
+		out << "O" << endl;
+	else
+		out << "X" << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}

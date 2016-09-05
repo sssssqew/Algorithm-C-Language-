@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	string a, b;
+	int len, i, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> len;
+	in >> a;
+	in >> b;
+
+	for(i=0 ; i<len ; i++){
+		if(a[i] != b[i])
+			cnt++;
+	}
+	out << cnt << endl;
+
+	return 0;
+}
+
+
+

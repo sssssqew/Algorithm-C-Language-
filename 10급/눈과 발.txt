@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int Eyes, Legs;
+	int total, tazoLeg, cawLeg;
+	int tazoOnlyLegs;
+	int tazoNum, cawNum;
+	tazoLeg = 2;
+	cawLeg = 4;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> Eyes >> Legs;
+
+	if(Eyes%2 == 0)
+	    total = Eyes/2;
+
+    tazoOnlyLegs = tazoLeg * total;
+	cawNum = (Legs - tazoOnlyLegs)/(cawLeg - tazoLeg);
+	tazoNum = total - cawNum;
+
+	out << tazoNum << " " << cawNum;
+
+	return 0;
+}
+	

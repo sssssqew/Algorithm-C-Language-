@@ -1,0 +1,68 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 100
+using namespace std;
+
+void storeNum(int* ar, string n);
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int a[len] = {0, }, b[len] = {0, }, c[2*len] = {0, };
+	int i, j, alen, blen, clen, last, cnt;
+	string num;
+
+	in >> num;
+	storeNum(a, num);
+	alen = num.size();
+
+	for(i=len-alen ; i<len ; i++) cout << a[i];
+	cout << endl;
+
+	in >> num;
+	storeNum(b, num);
+	blen = num.size();
+
+	for(i=len-blen ; i<len ; i++) cout << b[i];
+	cout << endl;
+
+	//곱셈하여 결과를 저장함(더함)
+	//(i+j)는 a배열 전체를 곱한 다음 i때문에 1씩 감소
+	//(i+j)는 a배열 각 자리수를 곱하면서 alen만큼 감소 
+	for(i=len-1 ; i>=len-blen ; i--){
+		for(j=len-1 ; j>=len-alen ; j--)
+			c[i+j] += a[j] * b[i];
+	}
+
+	clen = alen + blen - 1; 
+	last = 2*len-1;	
+
+	//자리올림 
+	for(i=last-1 ; i>=last-clen ; i--){
+		c[i-1] += c[i] / 10;
+		c[i] = c[i] % 10;
+	}
+	//마지막 자리올림 발생시 길이 1 증가 
+	if(c[i] != 0) clen = clen + 1;
+
+	//유효숫자 4자리까지만 출력함 
+	cnt = 0;
+	for(i=last-clen ; i<last ; i++){
+		out << int(c[i]);
+		cnt++;
+		if(cnt == 4) break;
+	}
+
+	return 0;
+}
+
+void storeNum(int* ar, string n){
+	int i, nlen;
+	nlen = n.size();
+	for(i=0 ; i<nlen ; i++)
+		ar[len-nlen+i] = n[i] - '0';	
+}
+

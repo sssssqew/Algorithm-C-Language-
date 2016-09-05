@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	char alpha[] = "I Love you so much, But I thank you !!";
+	char ch;
+	int i, j, len;
+	len = strlen(alpha);
+
+	for(i=0 ; i<len ; i++){
+		for(j=0 ; j<len ; j++){
+			cout << alpha[j];
+		}
+		cout << endl;
+		ch = alpha[len-1];
+		for(j=len-1 ; j>0 ; j--){
+			alpha[j] = alpha[j-1];
+		}
+		alpha[0] = ch;
+	}
+
+	return 0;
+}

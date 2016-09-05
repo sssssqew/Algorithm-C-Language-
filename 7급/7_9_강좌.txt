@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#define compare 2002
+using namespace std;
+
+int main(){
+	int i, j, max, cnt, pick;
+	max = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	for(i=100 ; i<=999 ; i++){
+		cnt = 0;
+		for(j=1 ; j<=i ; j++){
+			if(compare % j == 0 && i % j == 0)
+				cnt++;
+		}
+		if(cnt > max){
+			max = cnt;
+			pick = i;
+		}
+	}
+	cout << pick << "   " << max << endl;
+
+	return 0;
+}

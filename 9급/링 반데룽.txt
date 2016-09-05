@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+#define eps1 100
+#define eps2 10000
+using namespace std;
+
+int main(){
+	int distance, rate, p = 1;
+	double location = 0, num;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> distance >> rate;
+		if((distance >= eps1 && distance <= eps2) && (rate >= 1 && rate <= eps1))
+			break;
+	}while(true);
+
+	location = distance;
+	num = distance;
+
+	int i = 0;
+	do{
+		if(abs(num) >= 1){
+			p = -p;
+			num = p * ((abs(num) * rate) / (double)eps1);
+			location += num;
+		}else{
+			break;
+		}
+	}while(true);
+
+	out << (int(location) / 10) * 10 << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

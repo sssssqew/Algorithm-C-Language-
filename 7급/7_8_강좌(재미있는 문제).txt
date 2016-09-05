@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#define end 100000
+using namespace std;
+
+int main(){
+	int i, j, max, cnt, pick;
+	max = 0; cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	for(i=1 ; i<=end ; i++){
+		j = i;
+		//cout << j << "  "; //시간이 오래 걸림 
+		while(j != 4){
+			if(j % 2 == 0)
+				j = j / 2;
+			else
+				j = j * 3 + 1;
+			//cout << j << "  ";
+			cnt++;
+		}
+		//cout << endl << endl;
+		if(cnt > max){
+			max = cnt;
+			pick = i;
+		}
+		cnt = 0;
+	}
+	cout << pick << " " << max << endl;
+
+	return 0;
+}

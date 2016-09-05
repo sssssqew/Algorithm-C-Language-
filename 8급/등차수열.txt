@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int a, d, n;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> a;
+	in >> d;
+	in >> n;
+
+	for(int i = 1;i <= n;i++){
+		out << d * i + (a - d) << endl;
+	}
+
+	return 0;
+}
+
+	
+   
+
+
+
+
+

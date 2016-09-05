@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int total, Legs;
+	int birdLeg, bugLeg;
+	int birdOnlyLegs;
+	int birdNum, bugNum;
+	birdLeg = 2;
+	bugLeg = 6;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> total >> Legs;
+    //calculate the legs of bird if only birds exist
+    birdOnlyLegs = birdLeg * total;
+	//whenever one bug is added and one bird disappear, 
+	//bugLeg = 6 are added and birdLeg = 2 disapper
+	//so one bug is added, 4 legs are added
+	bugNum = (Legs - birdOnlyLegs)/(bugLeg - birdLeg);
+	birdNum = total - bugNum;
+
+	out << birdNum << " " << bugNum;
+
+	return 0;
+}
+	

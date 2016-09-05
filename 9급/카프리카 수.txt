@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int n, quota, remainder;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+	quota = n / 100;
+	remainder = n % 100;
+
+	if(pow(quota+remainder,2) == n)
+		out << 1 << endl;
+	else
+		out << 0 << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

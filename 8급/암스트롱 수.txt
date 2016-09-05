@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int n1, n2, cnt;
+	int d1, d2, d3;
+	cnt = 0;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n1 >> n2;
+
+	int i;
+	for(i=n1 ; i<=n2 ; i++){
+		d1 = i / 100;
+		d2 = (i % 100) / 10;
+		d3 = (i % 100) % 10;
+		if((d1*d1*d1 + d2*d2*d2 + d3*d3*d3) == i)
+			cnt++;
+	}
+	out << cnt << endl;
+
+	
+    in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, i, total;
+	total = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	i = 0;
+	do{
+		total += n / 2;
+		n = n / 2 + n % 2;
+		i++;
+	}while(n >= 2);
+
+	out << total << endl;
+	out << i << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

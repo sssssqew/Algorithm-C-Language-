@@ -1,0 +1,53 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+string findSpecies(string unitName[], string unit);
+
+int main(){
+	int n;
+	string terran[7] = {"Terran", "Marine", "Firebat", "Medic", "Vulture", "Tank"};
+    string protoss[6] = {"Protoss", "Zealot", "Dragoon", "HighTempler", "DarkTempler"};
+	string zerg[6] = {"Zerg", "Zergling", "Hydralisk", "Lurker", "Mutalisk"};
+	string result, unit;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+	int i = 0;
+	do{
+		in >> unit;
+        result = findSpecies(terran, unit);
+		if(result != "")
+			out << result << endl;
+		result = findSpecies(protoss, unit);
+		if(result != "")
+			out << result << endl;
+		result = findSpecies(zerg, unit);
+		if(result != "")
+			out << result << endl;
+
+		i++;
+	}while(i < n);
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+string findSpecies(string unitName[], string unit){
+	int i = 0;
+	do{
+		if(unitName[i] == ""){
+			return "";
+		}else{
+			if(unitName[i] == unit)
+				return unitName[0];
+		}
+		i++;
+	}while(true);
+}

@@ -1,0 +1,38 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+using namespace std;
+
+int main(){
+	int n, i, term, result, s;
+	s = 0; term = 1;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> n;
+		if(n >= 0 && n <= 100){
+			if(n >= 5)
+				n = 5;
+			break;
+		}
+	}while(true);
+
+	i = 1;
+	do{
+		term *= i;
+		s += term;
+		i++;
+	}while(i <= n);
+
+    result = s % 10;
+
+	out << result << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

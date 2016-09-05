@@ -1,0 +1,70 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+//unit : 1, 10, 100, 1000, ... 까지의 1의 갯수 
+//unit : 0, 1, 20, 300, 4000, 50000, ...
+//unit : 1 = 0 * 10 + 1, 20 = 1 * 10 + 10, 300 = 20 * 10 + 100
+
+//find : 갯수를 찾고자 하는 숫자 
+//pos : 각 자리에서의 갯수 (자릿수가 찾고자 하는 수보다 큰 경우)
+
+/* digit = 1인 경우 각 자리의 갯수 (예)
+1123인 경우 천의 자리의 1의 갯수는 
+1000, 1001, 1002, ..., 1123 = 총 (123 + 1)개 
+즉, 1123 % 1000 + 1 개 
+*/ 
+
+/*예 (1을 찾는 경우) 
+
+199981 = (1 * 50000) + (99981 + 1) + => digit = 1인 경우 
+		 (9 *  4000) + 10000 + (pos) => digit > 1인 경우 
+	     (9 *   300) +  1000 + 
+         (9 *    20) +   100 +
+         (8 *     1) +    10 +
+		 (1 *     0) +     1
+*/
+
+//구글연구소 능력시험 : f(n) = n 인 두번째 값을 찾음 
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int i, temp, digit, unit, pos, s, find;
+	find = 1;
+
+	i = 0;
+	do{
+		temp = i;
+		unit = 0; pos = 1; s = 0;
+		do{
+
+			digit = temp % 10;
+			temp = temp / 10;
+
+			s += digit * unit;
+			unit = unit * 10 + pos;
+
+			if(digit > find)
+				s += pos;
+			if(digit == find)
+				s += i % pos + 1;
+
+			pos = pos * 10;
+
+		}while(temp != 0);
+
+		if(i != 0 && i != 1 && i == s)
+			break;
+
+		i++;
+
+	}while(true);
+
+	cout << s << endl;
+
+	return 0;
+}
+

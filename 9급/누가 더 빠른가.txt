@@ -1,0 +1,47 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+using namespace std;
+
+int main(){
+	string stone = "돌멩이";
+	string ball = "축구공";
+	string shoes = "신발";
+	string input = "";
+	int stoneNum = 0, ballNum = 0, shoesNum = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> input;
+		if(input == ""){
+			break;
+		}else{
+			if(input == stone)
+				stoneNum++;
+			else if(input == ball)
+				ballNum++;
+			else if(input == shoes)
+				shoesNum++;
+		}
+	}while(true);
+
+	if(stoneNum > ballNum){
+		if(stoneNum > shoesNum)
+			out << stone << endl;
+		else
+			out << shoes << endl;
+	}else{
+		if(ballNum > shoesNum)
+			out << ball << endl;
+		else
+			out << shoes << endl;
+	}
+	
+	in.close();
+	out.close();
+
+	return 0;
+}

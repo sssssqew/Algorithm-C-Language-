@@ -1,0 +1,89 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 10000
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	string a, b, ex;
+	int c[len] = {0, };
+	int aNum, bNum, tmp;
+	int idxA, idxB, i, w;
+	int result = 0, cnt = 0, f = 0, sign = 0;
+
+	in >> a;
+	in >> b;
+
+	if(a.size() < b.size()){
+		ex = a;
+		a = b;
+		b = ex;
+		sign = 1;
+	}
+
+	if(a.size() == b.size()){
+		for(i=0 ; i<a.size() ; i++){
+			aNum = a[i] - '0';
+			bNum = b[i] - '0';
+			if(aNum > bNum){
+				break;
+			}else if(aNum < bNum){
+				ex = a;
+				a = b;
+				b = ex;
+				sign = 1;
+				break;
+			}
+		}
+	}
+
+	idxA = a.size();
+	idxB = b.size();
+	tmp = len;
+
+	//자리수에 맞춰서 빼주기만 함(빌림수 무시)
+	do{
+		idxA--;
+		idxB--;
+		tmp--;
+
+		if(idxA >= 0)
+			aNum = a[idxA] - '0';
+		else
+			aNum = 0;
+
+		if(idxB >= 0)
+			bNum = b[idxB] - '0';
+		else
+			bNum = 0;
+
+		c[tmp] = aNum - bNum;
+	}while(idxA >= 0);
+
+	//자리수가 0보다 작으면 빌림 
+	for(i=len-1; i>=0 ; i--){
+		if(c[i] < 0){
+			c[i] += 10;
+			c[i-1]--;
+		}
+	}
+	if(sign) out << "-";
+
+	//뺄셈 결과가 4자리 이하인 경우 제외 
+	w = 1000;
+	for(i=0 ; i<len ; i++){
+		if(c[i] != 0) f = 1;
+		if(f){
+			result += w * c[i];
+			w = w / 10;
+		}
+	}
+	out << result << endl;
+
+	return 0;
+}
+

@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, data;
+	double result = 0;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(int i = 1;i <= n;i++){
+		in >> data;
+		if(i != n)
+			result = 1 / (result + data);
+		else
+			result = result + data;
+	}
+
+	out.setf(ios::fixed);
+	out.precision(2);
+	out << result << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

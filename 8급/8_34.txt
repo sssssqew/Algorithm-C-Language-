@@ -1,0 +1,43 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int n, dice1, dice2, s, F, i;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=0 ; i<n ; i++){
+		in >> dice1 >> dice2;
+		s = dice1 + dice2;
+		if(i == 0){
+			if(s == 7 || s == 11){
+				out << "A" << endl;
+				break;
+			}else if(s == 2 || s == 3 || s == 12){
+				out << "B" << endl;
+				break;
+			}else{
+				F = s;
+			}
+		}else{
+			if(s == F){
+				out << "A" << endl;
+				break;
+			}else if(s == 7){
+				out << "B" << endl;
+				break;
+			}
+		}
+	}
+	
+	if(i == n)
+		out << "M" << endl;
+
+	return 0;
+}
+

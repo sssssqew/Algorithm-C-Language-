@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+//체크배열을 이용한 간단한 정렬 알고리듬(중복이 있는 경우)
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int a[] = {55, 33, 99, 77, 11, 33, 99, 77, 11};
+	int check[100] = {0, };
+	int i, j, idx;
+
+	for(i=0 ; i<9 ; i++){
+		idx = a[i];
+		check[idx] += 1;
+	}
+	for(i=0 ; i<100 ; i++){
+		if(check[i] != 0){
+			for(j=0 ; j<check[i] ; j++)
+				cout << i << " ";
+		}
+	}
+	cout << endl;
+
+	return 0;
+}
+	

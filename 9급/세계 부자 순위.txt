@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+string findSpecies(string unitName[], string unit);
+
+int main(){
+	double income;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> income;
+
+	if(income <= 400)
+		out << "bottom 10" << endl;
+	else if(income <= 500)
+		out << "bottom 20" << endl;
+	else if(income <= 850)
+		out << "bottom 50" << endl;
+	else if(income <= 1487)
+		out << "bottom 75" << endl;
+	else if(income <= 2182)
+		out << "bottom 85" << endl;
+	else if(income >= 25400 && income <= 33700)
+		out << "top 10" << endl;
+	else if(income >= 33700 && income <= 47500)
+		out << "top 5" << endl;
+	else if(income > 47500)
+		out << "top 1" << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

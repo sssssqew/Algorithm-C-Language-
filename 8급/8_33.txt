@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int allMatch, oneMatch, n, data, i, s, t;
+	s = 0; t = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> allMatch;
+	in >> oneMatch;
+	in >> n;
+
+	i = 0;
+	do{
+		in >> data;
+		s += (oneMatch+1)-data;
+		t += oneMatch+1;
+		if(t+1 == allMatch)
+			break;
+		i++;
+	}while(i < n);
+
+	out << s << endl;
+	return 0;
+}
+

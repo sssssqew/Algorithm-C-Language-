@@ -1,0 +1,62 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+//체크배열을 이용한 알파벳 정렬 알고리듬(중복이 있는 경우)
+//알파벳 사전순 비교 알고리듬 
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	bool isSlave;
+	char str[100];
+	int alpha[26] = {0, };
+	int i, j, k, num, idx;
+	string name, comp;
+	comp = "AAHINORSTTUU";
+
+	in >> num;
+	getline(in, name);
+	for(i=1 ; i<=num ; i++){
+		isSlave = false;
+		getline(in, name);
+
+		for(j=0 ; j<name.length() ; j++){
+			if(name[j] >= 'A' && name[j] <= 'Z'){
+				idx = name[j] - 'A';
+				alpha[idx]++;
+			}else if(name[j] >= 'a' && name[j] <= 'z'){
+				idx = name[j] - 'a';
+				alpha[idx]++;
+			}
+		}
+		idx = 0;
+		for(j=0 ; j<26 ; j++){
+			if(alpha[j] != 0){
+				for(k=0 ; k<alpha[j] ; k++)
+					str[idx++] = char(j+'A');
+				str[idx] = '\0';
+				alpha[j] = 0;
+			}
+		}
+		out << str;
+		for(j=0 ; j<comp.length() ; j++){
+			if(str[j] == '\0') break;
+			else{
+				if(comp[j] < str[j]){
+					isSlave = true;
+					break;
+				}else if(comp[j] > str[j]){
+					break;
+				}
+			}
+		}
+		out << " " << isSlave;
+		out << endl;
+	}
+	out << endl;
+
+	return 0;
+}
+	

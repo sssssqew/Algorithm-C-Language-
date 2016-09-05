@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	double input1, input2, fatherAge;
+	double ep1, ep2;
+	 
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+    in >> input1;
+	in >> input2;
+
+	fatherAge = pow(10,input1);
+	do{
+		ep1 = fmod(input2,fatherAge);
+		if(ep1 == 0){
+			ep2 = input2 / fatherAge;
+			if(ep2 == pow(10,input1) - 1)
+				break;
+		}
+		fatherAge++;
+	}while(1);
+
+	out << int(fatherAge) << endl;
+
+	
+	return 0;
+}

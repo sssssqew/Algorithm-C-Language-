@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#define defaultDown 1
+#define defaultUp 5
+#define burdenDown 10
+#define burdenUp 50
+using namespace std;
+
+int main(){
+	int moveNum, start, dest, weight, Watt, i;
+	Watt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> moveNum;
+
+	for(i=1 ; i<=moveNum ; i++){
+		in >> start >> dest >> weight;
+		if(start > dest){
+			Watt += (start - dest) * defaultDown + (start - dest) * burdenDown * weight;
+		}else{
+			Watt += (dest - start) * defaultUp + (dest - start) * burdenUp * weight;
+		}
+	}
+	out << Watt << endl;
+
+	return 0;
+}
+

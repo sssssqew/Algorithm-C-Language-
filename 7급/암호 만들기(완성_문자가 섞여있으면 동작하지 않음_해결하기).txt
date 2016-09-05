@@ -1,0 +1,58 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string str;
+	int n, i, j, p, cnt, flag;
+
+	in >> str;
+	n = atoi(str.c_str());
+
+	for(i=1 ; i<=n; i++){
+		in >> str;
+		p = 0; cnt = 0; flag = -1; j = 0;
+		//끝부분에 #이나 ?가 있는 경우도 있으므로
+		//NULL문자인 경우까지 포함하여 반복시킴 
+		while(j<=str.length()){
+			if(str[j] == '#' || str[j] == '?'){
+				cnt++;
+				if(str[j] == '#') 
+					flag = 0;
+				else if(str[j] == '?') 
+					flag = 1;
+			}else{
+				if(cnt != 0){
+					if(flag == 0)
+						p = p - cnt;
+					else if(flag == 1)
+						j = j + cnt;
+
+					cnt = 0;
+					flag = -1;
+
+					//?만큼 이동했는데 또 물음표가 나온 경우 
+					if(str[j] == '?')
+						continue;
+				}
+				if(j != str.length()){
+					str[p] = str[j];
+					p++;
+				}
+			}
+			if(str[j] == '&' || str[p] == '&'){
+				p = 0;
+				break;
+			}
+			j++;
+		}
+		out << str.substr(0, p) << endl;
+	}
+
+	return 0;
+}

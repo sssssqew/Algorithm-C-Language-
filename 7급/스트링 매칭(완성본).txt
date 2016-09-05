@@ -1,0 +1,62 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+//love 만 찾는 건가 아니면 loveLoose 등 처럼 love가 포함된 단어도 해당되는 건가?
+char lowerCase(char c);
+
+int main(){
+	string match, text;
+	int i, j, temp;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	//파일입력에서 공백이 있어도 한 줄을 읽음 
+	getline(in, match);
+	getline(in, text);
+
+	//cout << match << endl;
+	//cout << text << endl;
+
+	i = 0;
+	while(text[i] != NULL){
+		temp = i;
+		j = 0;
+		while(match[j] != NULL){
+			if(lowerCase(text[temp]) != lowerCase(match[j])){
+				break;
+			}else{
+				temp++;
+				j++;
+			}
+		}
+		i++;
+		//lovelove 처럼 love가 포함된 단어도 해당 
+		/*if(match[j] == NULL){
+			out << i << endl;
+			break;
+		}*/
+		//love만 해당 (love 단어 앞 뒤로 문자가 나오지 않는 경우)
+		if(match[j] == NULL){
+			if((lowerCase(text[i-2]) < 97 || lowerCase(text[i-2]) > 122) && 
+				(lowerCase(text[temp]) < 97 || lowerCase(text[temp]) > 122)){
+					out << i << endl;
+					break;
+			}
+		}
+	}
+	if(text[i] == NULL)
+		out << 0 << endl;
+
+	return 0;
+}
+char lowerCase(char c){
+	if(c >= 65 && c <= 90)
+		return c + 32;
+	else
+		return c;
+}
+

@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+string findSpecies(string unitName[], string unit);
+
+int main(){
+	int lunarDay, lastNum;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> lunarDay;
+		if(lunarDay >= 1 && lunarDay <= 29)
+			break;
+	}while(true);
+
+	lastNum = lunarDay % 10;
+	
+	if(lastNum == 1 || lastNum == 2)
+		out << "East" << endl;
+	else if(lastNum == 3 || lastNum == 4)
+		out << "West" << endl;
+	else if(lastNum == 5 || lastNum == 6)
+		out << "South" << endl;
+	else if(lastNum == 7 || lastNum == 8)
+		out << "North" << endl;
+	else if(lastNum == 9 || lastNum == 0)
+		out << "Rest" << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

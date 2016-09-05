@@ -1,0 +1,60 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+#define eps 10000
+using namespace std;
+
+int main(){
+	int radius, field, thisQ, lastQ, Quantity, price;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> radius >> field >> thisQ >> lastQ;
+		if((thisQ >=0 && thisQ <= eps) && (lastQ >=0 && lastQ <= eps))
+			break;
+	}while(true);
+
+	Quantity = thisQ - lastQ;
+
+	if(radius == 13)
+		price = 570;
+	else if(radius == 20)
+		price = 1330;
+	else if(radius == 25)
+		price = 2560;
+
+	if(field == 1){
+		if(Quantity >= 0 && Quantity <= 10)
+			price += Quantity * 460;
+		else if(Quantity >= 11 && Quantity <= 20)
+			price += Quantity * 520;
+		else if(Quantity >= 21 && Quantity <= 30)
+			price += Quantity * 570;
+		else if(Quantity >= 31 && Quantity <= 40)
+			price += Quantity * 710;
+		else if(Quantity >= 41 && Quantity <= 50)
+			price += Quantity * 860;
+		else 
+			price += Quantity * 990;
+	}else if(field == 2){
+		if(Quantity >= 0 && Quantity <= 20)
+			price += Quantity * 970;
+		else if(Quantity >= 21 && Quantity < 50)
+			price += Quantity * 1000;
+		else if(Quantity >= 51 && Quantity <= 100)
+			price += Quantity * 1080;
+		else if(Quantity >= 101 && Quantity <= 300)
+			price += Quantity * 1250;
+		else 
+			price += Quantity * 1670;
+	}
+	out << price << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

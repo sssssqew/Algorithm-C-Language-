@@ -1,0 +1,59 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+using namespace std;
+
+int reverse(int size, int p){
+	int reverseNum;
+	reverseNum = (size + 1) - p;
+	return reverseNum;
+};
+
+int move(int p, int m, int c){
+	if(m >= 0)
+		p = (p + m) % c;
+	else
+		p = reverse(c, ((reverse(c,p) + abs(m)) % c));
+	return p;
+};
+
+
+int main(){
+	int cellSize, position, n, movingSize;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> cellSize;
+		in >> position;
+		in >> n;
+		if(cellSize >= 3 && cellSize <= 1000){
+			if((position >= 1 && position <= cellSize) && (n >= 1 && n <= 1000))
+				break;
+		}
+	}while(true);
+
+	int i = 0;
+	do{
+		in >> movingSize;
+		if(movingSize >= -10000 && movingSize <= 10000){
+				//반시계 방향으로 돌 때와 같은 방법을 이용하여 구함 
+				//다만 100을 1로 보고 1을 100으로 보고 같은 방법을 적용함
+				//100 -> 1, 1 -> 100 변환을 위해 함수 사용
+				//100 -> 1로 변경했으므로 움직임 크기는 더해줘야 하므로 절대값 취함
+				//처음 변환하고 같은 방법으로 계산한 다음 다시 원래대로 변환해 줘야 함 
+				position = move(position, movingSize, cellSize); 
+		}
+		i++;
+	}while(i < n);
+
+	out << position << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}

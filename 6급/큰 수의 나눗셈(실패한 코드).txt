@@ -1,0 +1,88 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 10000
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, k, f, sign;
+	int blen, tlen, cnt;
+	long int a[len] = {0, }, com[len] = {0, }, mid[len] = {0, }, tmp[len] = {0, };
+	string num;
+
+	in >> num;
+	for(i=0 ; i<num.size() ; i++) a[len-num.size()+i] = num[i] - '0';
+	in >> num;
+	for(i=0 ; i<num.size() ; i++) com[len-num.size()+i] = num[i] - '0';
+	blen = num.size();
+	for(i=len-blen ; i<len ; i++) mid[i] = com[i];
+
+	tmp[len-1] = 1;
+
+	f = 1;
+	do{
+		tmp[len-1] += 1;
+		tlen = 0;
+
+		sign = 0;
+		//initialize b array to store result
+		for(j=0 ; j<len ; j++){
+			if(com[j] != 0) com[j] = 0;
+		}
+
+		//sum carry of each digit 
+		for(j=len-1 ; j>=0 ; j--){ 
+			tmp[j-1] += tmp[j] / 10;
+			tmp[j] = tmp[j] % 10;
+		}
+
+		sign = 0;
+		for(j=0 ; j<len ; j++){
+			if(tmp[j] != 0) sign = 1;
+			if(sign) tlen++;
+		}
+		
+		//do multiply of input data 
+		for(j=len-1 ; j>=len-tlen ; j--){
+			cnt++;
+			for(k=len-1 ; k>=len-blen ; k--){
+				com[j-(len-1-k)] += mid[k] * tmp[j];				
+			}
+		}
+		for(j=len-1 ; j>=0 ; j--){
+			com[j-1] += com[j] / 10;
+			com[j] = com[j] % 10;
+		}
+
+		sign = 0; blen = 0;
+		for(j=0 ; j<len ; j++){
+			if(com[j] != 0) sign = 1;
+			if(sign) blen++;
+		}
+
+		//compare two enormous number one digit at a time 
+		for(j=0 ; j<len ; j++){
+			if(a[j] > com[j]){
+				break;
+			}else if(a[j] < com[j]){
+				f = 0;
+				break;
+			}
+		}
+	}while(f);
+
+	//display calculation result
+	sign = 0;
+	for(j=0 ; j<len ; j++){
+		if(com[j] != 0) sign = 1;
+		if(sign) cout << com[j] << " ";
+	}
+	cout << endl;
+
+	return 0;
+}
+

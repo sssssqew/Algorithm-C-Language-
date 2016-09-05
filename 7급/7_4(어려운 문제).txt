@@ -1,0 +1,59 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+double digitSum(double x);
+
+int main(){
+	double data, ret, temp, max, pick;
+	int n, i;
+	max = -1;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> data;
+		temp = data;
+
+		do{
+			ret = digitSum(temp);
+
+			if(ret != temp)
+				temp = ret;
+			else 
+				break;
+		}while(true);
+
+		if(ret > max){
+			max = ret;
+			pick = data;
+		}else if(ret == max){
+			if(data < pick)
+				pick = data;
+		}
+	}
+	out << pick << endl;
+	
+	return 0;
+}
+
+double digitSum(double x){
+	int q, r;
+	double s = 0;
+
+	do{
+		q = floor(x / 10);
+		r = x - q*10;
+		s += r;
+		x = q;
+	}while(q != 0);
+
+	return s;
+}
+
+

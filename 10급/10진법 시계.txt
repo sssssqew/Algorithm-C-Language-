@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#define day2hour60 24
+#define hour2min60 60
+#define day2hour10 20
+#define hour2min10 100
+using namespace std;
+
+void main(){
+	int hour60, min60, hour10, min10;
+	int mid;
+	double portionOfDay;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> hour60 >> min60;
+		if((hour60 >=0 && hour60 < 24) && (min60 >= 0 && min60 < 60))
+			break;
+	}while(true);
+
+	portionOfDay = (double)(hour60 * hour2min60 + min60)/(day2hour60 * hour2min60);
+	mid = (day2hour10 * hour2min10) * portionOfDay;
+	hour10 = mid / hour2min10;
+	min10 = mid % hour2min10;
+
+
+
+	out << hour10 << " " << min10 << endl;
+
+	in.close();
+	out.close();
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+using namespace std;
+
+int main(){
+	int dataNum, day, cnt = 0;
+	double temp;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> dataNum;
+		if(dataNum >= 1 && dataNum <= 365)
+			break;
+	}while(true);
+
+	int i = 0;
+	do{
+		in >> day >> temp;
+		if(day >= 1 && temp >= -50 && temp <= 70)
+			if(temp > 15){
+				cnt++;
+				if(cnt == 3){
+					out << day + 1 << endl;
+					break;
+				}
+			}else{
+				cnt = 0;
+				}
+		i++;
+	}while(i < dataNum);
+
+	if(cnt < 3)
+		out << 0 << endl;
+	
+	in.close();
+	out.close();
+
+	return 0;
+}

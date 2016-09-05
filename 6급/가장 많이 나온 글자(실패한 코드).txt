@@ -1,0 +1,59 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define wordlen 20
+#define alphabet 26
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	char* word;
+	int* freq;
+	int i, j, n, len;
+
+	in >> n;
+ 
+	word = (char*)calloc(wordlen, sizeof(char));
+	freq = (int*)calloc(alphabet, sizeof(int));
+
+	for(i=0 ; i<n ; i++)
+	{
+		in >> word;
+  
+		//문제점 : a 가 있는 단어는 a 까지만 출력됨
+		//이유 : word[j] = word[j] - 'A' 구문 때문임
+		//A, a의 경우 위 구문 실행후 word[j] = '\0'(NULL)문자가 됨
+		//Banana의 경우 B,a 까지 실행하고 strlen(word)를 만나면 
+		//strlen()은 널문자를 만날때까지만 길이를 계산하므로 
+		//길이가 6->2로 바뀌면서 2번만 반복문 실행후 벗어나게 됨 
+		//해결책 1 : int ch = word[j] - 'A';
+		//해결책 2 : for문 들어가기 전에 int len = strlen(word);
+
+		for(j=0 ; j<strlen(word) ; j++)
+		{
+			cout << word[j] << " ";
+			if(word[j] >= 'A' && word[j] <= 'Z'){
+				word[j] = word[j] - 'A';
+				freq[word[j]] = freq[word[j]] + 1;
+			}
+			
+			if(word[j] >= 'a' && word[j] <= 'z'){
+				word[j] = word[j] - 'a';
+				freq[word[j]] = freq[word[j]] + 1;
+			}
+
+		}
+		cout << endl;
+	}
+	for(i=0 ; i<alphabet ; i++)
+		cout << freq[i] << " ";
+	cout << endl;
+	 
+	free(word);
+	free(freq);
+
+	return 0;
+}

@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, r, tmp, cnt;
+	int a[9];
+
+	for(i=100 ; i<=1000/3 ; i++){
+		cnt = 0;
+		for(j=0 ; j<9 ; j++) a[j] = 0;
+
+		for(j=1 ; j<=3 ; j++){
+			tmp = i*j;
+			do{
+				r = tmp % 10;
+				tmp = tmp / 10;
+				a[r-1] = r; 
+			}while(tmp != 0);
+		}
+		for(j=0 ; j<9 ; j++){
+			if(a[j] == 0) cnt++; 
+		}
+		if(!cnt) 
+			out << i << " " << i*2 << " " << i*3 << endl; 
+	}
+
+	return 0;
+}
+

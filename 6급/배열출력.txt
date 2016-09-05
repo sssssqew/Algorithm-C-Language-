@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int i, n;
+	int row, col;
+	int column;
+
+	row = 0; col = 0; column = col;
+	in >> n;
+
+	int* a = (int*)calloc(n*n, sizeof(int));
+
+	for(i=0 ; i<n*n ; i++){
+		a[row*n+col] = i+1; 
+		if(col == 0){
+			row = 0;
+			column++;
+			col = column;
+		}else{
+			row++;
+			col--;
+		}
+		if(column == n) break;
+	}
+	for(i=0 ; i<n*n ; i++){
+		if(a[i] != 0) out << a[i] << " ";
+		if(i != 0 && (i+1) % n == 0) out << endl;
+	}
+	out << endl;
+	return 0;
+}
+	

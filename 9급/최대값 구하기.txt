@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int dataNum, data, max;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	max = -pow(10,8);
+	in >> dataNum;
+	int i = 0;
+	do{
+		in >> data;
+		if(data >= -pow(10,8) && data <= pow(10,8)){
+			if(max < data)
+				max = data;
+		}
+		i++;
+	}while(i < dataNum);
+
+
+	out << max << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

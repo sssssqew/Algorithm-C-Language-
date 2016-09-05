@@ -1,0 +1,55 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+bool isAlphabet(char c);
+bool isNumber(char c);
+
+int main(){
+	string text;
+	int i, det;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	getline(in, text);
+
+	i = 0; det = 0;
+	do{
+		if(i == 0){
+			if(!isAlphabet(text[i]))
+				det++;
+		}else{
+			if(!isAlphabet(text[i]) && 
+				!isNumber(text[i]))
+				det++;
+		}
+		i++;
+	}while(text[i] != NULL);
+
+	if(i > 8)
+		det++;
+
+	if(det == 0)
+		out << 1 << endl;
+	else
+		out << 0 << endl;
+
+	return 0;
+}
+
+bool isAlphabet(char c){
+	if((c >= 65 && c <= 90) || 
+		(c >= 97 && c <= 122))
+		return true;
+	else
+		return false;
+}
+bool isNumber(char c){
+	if(c >= 48 && c <= 57)
+		return true;
+	else
+		return false;
+}

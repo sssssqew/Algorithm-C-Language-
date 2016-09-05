@@ -1,0 +1,129 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string> 
+#include <stdlib.h>
+using namespace std;
+
+void initArray(int* l);
+
+int main(){
+	int i, j, k, cnt, index;
+	int array[4] = {1,2,3,4};
+	int ret[4][24] = {0,0,0,0};
+	int langford[8] = {0,0,0,0,0,0,0,0};
+	int iPtr[8][10];
+	int flag = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+    //generate 24 order of array 
+	cnt = 0; index = 0;
+	i = 0;
+	do{
+		j = 0;
+		do{
+			k = 0;
+			do{
+				if(i != j && k != i && k != j){
+					ret[0][cnt] = array[i];
+					ret[1][cnt] = array[j];
+					ret[2][cnt] = array[k];
+					ret[3][cnt] = (array[0] + array[1] + array[2] + array[3]) - (array[i] + array[j] + array[k]);
+					cnt++;
+				}
+				k++;
+			}while(k < 4);
+			j++;
+		}while(j < 4);
+		i++;
+	}while(i < 4);
+    //display 24 order of array 
+	/*i = 0;
+	do{
+		j = 0;
+		do{
+			cout << ret[j][i] << " ";
+			j++;
+		}while(j < 4);
+		cout << endl;
+		i++;
+	}while(i < 24);*/
+	//solve Langford problem
+	cnt = 0;
+	i = 0; 
+	do{
+		j = 0;
+		do{
+			if(langford[i] == 0){
+				langford[i] = ret[j][cnt];
+				flag++;
+
+				if(i+ret[j][cnt]+1 > 7){
+					i = 0;
+				    initArray(langford);
+					cnt++;
+					flag = 0;
+					break;
+				}else{
+					if(langford[i+ret[j][cnt]+1] == 0){
+						langford[i+ret[j][cnt]+1] = ret[j][cnt];
+						flag++;
+						i++; j++;
+						if(flag == 8){
+							int n = 0;
+							do{
+								iPtr[n][index] = langford[n];
+								n++;
+							}while(n < 8);
+							index++;
+							flag = 0;
+						}
+					}else{
+						i = 0;
+						initArray(langford);
+						cnt++;
+						flag = 0;
+						break;
+					}
+				}
+			}else{
+				i++;
+			}
+		}while(j < 4);
+		if(cnt >= 24)
+			break;
+	}while(i < 8);
+
+	i = 0;
+	do{
+		j = 0;
+		do{	
+			if(iPtr[0][i] == 4){
+				out << iPtr[j][i] << " ";
+				j++;
+			}else{
+				break;
+			}
+		}while(j < 8);
+		i++;
+	}while(i < 10);
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+
+void initArray(int* l){
+	int n = 0;
+	do{
+		*(l+n) = 0;
+		n++;
+	}while(n < 8);
+}
+
+	
+
+

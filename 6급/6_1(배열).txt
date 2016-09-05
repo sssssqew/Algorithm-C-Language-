@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int i, n, a, b;
+	int *ptr;
+
+	in >> n;
+	in >> a >> b;
+
+	ptr = (int*) malloc(sizeof(int)*n);
+
+	for(i=0 ; i<n ; i++){
+		*(ptr+i) = pow(2,i+1);
+	}
+	for(i=a-1 ; i<=b-1 ; i++){
+		out << *(ptr+i) << " ";
+	}
+	free(ptr);
+
+	return 0;
+}

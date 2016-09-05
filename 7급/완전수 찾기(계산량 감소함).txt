@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+//진약수의 합 
+int propDivSum(int n);
+ 
+int main(){
+	int n, i, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	cin >> n;
+	
+	for(i=1 ; i<=n ; i++){
+		//완전수(perfect number)
+		if(propDivSum(i) == i){
+			cout << i << " ";
+			cnt++;
+		}
+	}
+	cout << endl;
+	cout << cnt << endl;
+
+	return 0;
+}
+
+int propDivSum(int n){
+	int i, s;
+	i = 1; s = 0;
+
+	while(i <= n/i){
+		if(n % i == 0){
+			s += i;
+			if(i != n/i)
+				s += n/i;
+		}
+		i++;
+	}
+	return s - n;
+}

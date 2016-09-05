@@ -1,0 +1,101 @@
+#include <iostream>
+#include <fstream>
+#define PeopleNum 4 
+using namespace std;
+
+int main()
+{
+	int hiker[PeopleNum], i, j, first, temp;
+	int minTime = 0, preMinTime = 100;
+	hiker[0] = 10; hiker[1] = 2; hiker[2] = 5; hiker[3] = 1;
+    
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+    //calculate minimum time to go and come at first 
+    i = 0; 
+	do{
+		j = i + 1;
+		do{
+			//when person go, choose large number
+			//when person come, choose small number
+			//but at first round trip, total time to take 
+			//is the sum of 2 numbers chosen of 4 people 
+			minTime = hiker[i] + hiker[j];
+	
+			if(minTime < preMinTime){
+				//update minimum time when person go and come at first
+				preMinTime = minTime;
+				//find who the person go over at first 
+				if(hiker[i] > hiker[j])
+					first = i;
+				else
+					first = j;
+			}
+			j++;
+		}while(j < PeopleNum);
+		i++;
+	}while(i < PeopleNum - 1);
+    //store result in the middle of calculating
+	temp = preMinTime;
+	//calculate total time when 4 people go over the bridge
+	//and select the least time to take 
+	preMinTime = 100;
+	i = 0; 
+    int cnt = 0;
+	do{
+		j = i + 1;
+		do{
+			if(i != first && j != first){
+				//find one person left to go over the bridge 
+				int last = (PeopleNum - 1) * PeopleNum / 2 - (i + j + first); 
+	            //calculate time to go and come second time 
+				//when person go, choose large number
+				//when person come, choose small number of 3 people 
+				if(hiker[i] > hiker[j]){
+					minTime = hiker[i];
+					if(hiker[j] > hiker[first]){
+						minTime += hiker[first];
+						//add time to go over the bridge at last 
+						//choose large number between person left at last 
+						//and person who came back 
+						if(hiker[first] > hiker[last])
+							minTime += hiker[first];
+						else
+							minTime += hiker[last];
+					}else{
+						minTime += hiker[j];
+						if(hiker[j] > hiker[last])
+							minTime += hiker[j];
+						else
+							minTime += hiker[last];
+					}
+				}else{
+					minTime = hiker[j];
+					if(hiker[i] > hiker[first]){
+						minTime += hiker[first];
+						if(hiker[first] > hiker[last])
+							minTime += hiker[first];
+						else
+							minTime += hiker[last];
+					}else{
+						minTime += hiker[i];
+						if(hiker[i] > hiker[last])
+							minTime += hiker[i];
+						else
+							minTime += hiker[last];
+					}
+				}
+				//find minimum time to take second time 
+				if(minTime < preMinTime)
+					preMinTime = minTime;		
+				cnt++;
+			}
+			j++;
+		}while(j < PeopleNum);
+		i++;
+	}while(i < PeopleNum - 1);
+
+	cout << temp + preMinTime << endl;
+	return 0;
+}
+	

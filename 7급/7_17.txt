@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+char lowerCase(char c);
+
+int main(){
+	int i, n, low, high, Guess;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> Guess;
+	in >> n;
+	
+	for(i=1 ; i<=n ; i++){
+		in >> low >> high;
+
+		if(high < Guess){
+			out << "너무 작음" << endl;
+		}else if(low > Guess){
+			out << "너무 큼" << endl;
+		}else if(Guess >= low && Guess <= high){
+			if(Guess == low && Guess == high)
+				out << "게임 끝" << endl;
+			else
+				out << "까치발" << endl;
+		}
+	}
+	
+	return 0;
+}
+
+char lowerCase(char c){
+	if(c >= 65 && c <= 90)
+		return c + 32;
+	else
+		return c;
+}

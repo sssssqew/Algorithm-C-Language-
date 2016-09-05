@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+#define eps 32767
+using namespace std;
+
+int main(){
+	int n, data, pNum = 0, nNum = 0, zNum = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> n;
+		if(n >= 1 && n <= 100)
+			break;
+	}while(true);
+
+	int i = 0;
+	do{
+		in >> data;
+		if(data >= -1 * (eps + 1) && data <= eps){
+			if(data > 0)
+				pNum++;
+			else if(data < 0)
+				nNum++;
+			else
+				zNum++;
+		}
+		i++;
+	}while(i < n);
+
+	out << pNum << endl;
+	out << zNum << endl;
+	out << nNum << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

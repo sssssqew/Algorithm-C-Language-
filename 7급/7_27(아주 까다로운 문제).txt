@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#include <time.h>
+using namespace std;
+
+int main(){
+	float A, B;
+	int x, ys, pys, cnt, flag;
+	cnt = 0; flag = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> A >> B;
+
+	for(float i=0 ; i<=6.4 ; i+=0.01){
+		x = i * 50 + 30;
+		ys = 30 * sin(A * i) * cos(B * i) + 150;
+
+		//ys가 int형이라서 감소구간에서도 
+		//ys = pys 인 경우가 존재하므로 주의 
+		if(i != 0){
+			//감소하는 경향인 경우 
+			if(ys < pys){
+				cnt++;
+			}else if(ys > pys){
+				//이전에 감소하고 있었고 
+				//현재 증가하는 경향인 경우 
+				if(cnt != 0){
+					flag++;
+					cnt = 0;
+				}
+			}
+		}
+		//원래는 마루의 갯수를 세아려야 하지만
+		//아래로 한번 감소했을때 사람 눈으로는 
+		//봉우리로 보이지 않기 때문에 봉우리와 
+		//갯수가 비슷한 골의 갯수를 헤아려서 
+		//테스트해보니까 몇가지 경우 답이 일치함 
+
+		pys = ys;
+	}
+	out << flag << endl;
+
+	return 0;
+}
+

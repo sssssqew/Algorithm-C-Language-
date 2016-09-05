@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#define lo 1
+#define up 9
+using namespace std;
+
+int main(){
+	int n, cnt;
+	int a, b, c, d, e, f, g;
+	cnt = 0;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(a=lo ; a<=up ; a++){
+		for(b=lo ; b<=up ; b++){
+			for(c=lo ; c<=up ; c++){
+				for(d=lo ; d<=up ; d++){
+					for(e=lo ; e<=up ; e++){
+						for(f=lo ; f<=up ; f++){
+							g = (a*10+b) + (c*10+d)*e - n - f*10;
+							if(g >= lo && g <= up){
+								out << a << b << c << d << e << f << g << endl;
+								cnt++;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	out << cnt << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

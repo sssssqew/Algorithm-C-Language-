@@ -1,0 +1,53 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int gcd(int a, int b);
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int a, b, c, g;
+	
+	in >> b >> a;
+
+	do{
+		if(gcd(b, a) != 1){
+			g = gcd(b, a);
+			b = b / g;
+			a = a / g;
+		}
+		if(a == 1)
+			break;
+
+		c = b / a + 1;
+		a = a * c - b;
+		b = b * c;
+		out << c << endl;
+	}while(true);
+
+	out << b << endl;
+
+	return 0;
+}
+
+int gcd(int a, int b){
+	int r;
+	do{
+		r = a % b;
+		a = b;
+		b = r;
+	}while(r != 0);
+
+	return a;
+}
+
+
+
+
+
+
+

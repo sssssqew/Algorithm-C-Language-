@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+char changeType(int x);
+
+int main(){
+	double A, B, C, D, temp;
+	//(0,1) (1,2) (2,3) (0,1) (1,2) (0,1) 
+	//array 인덱스가 위와 같은 쌍으로 6번 비교함 
+	int index[6] = {0,1,2,0,1,0};
+	double array[8];
+
+	int i = 0;
+	do{
+		array[i] = 0;
+		i++;
+	}while(i < 8);
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> A >> B >> C >> D;
+
+    array[0] = A; array[1] = B; array[2] = C; array[3] = D;
+    array[4] = 0; array[5] = 1; array[6] = 2; array[7] = 3;
+
+	i = 0;
+	do{
+		//앞에 있을수록 숫자가 커야 하므로 뒤의 숫자가 크면 앞의 수와 교환함 
+		//A -> (0,4) B -> (1,5) C -> (2,6) D -> (3,7) 각 쌍에 맞는 알파벳도 함께 교환함 
+		//A(0) B(1) C(2) D(3)으로 생각함 
+		if(array[index[i]] < array[index[i]+1]){
+			temp = array[index[i]]; array[index[i]] = array[index[i]+1]; array[index[i]+1] = temp;
+			temp = array[index[i]+4]; array[index[i]+4] = array[index[i]+5]; array[index[i]+5] = temp;
+		}
+		i++;
+	}while(i < 6);
+
+	out << changeType(array[4]) << " " << changeType(array[5]) << " " << changeType(array[6]) << " " << changeType(array[7]) << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+char changeType(int x){
+	if(x == 0)
+		return 'A';
+	else if(x == 1)
+		return 'B';
+	else if(x == 2)
+		return 'C';
+	else if(x == 3)
+		return 'D';
+	else
+		return 'E';
+};

@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	string a[7], t;
+	int n, i, j;
+	n = 7;
+	a[0] = "You've";
+	a[1] = "made";
+	a[2] = "all";
+	a[3] = "my";
+	a[4] = "dreams";
+	a[5] = "come";
+	a[6] = "true.";
+
+	for(i=0 ; i<n-1 ; i++){
+		for(j=i+1 ; j<n ; j++){
+			if(a[i] > a[j]){
+				t = a[i];
+				a[i] = a[j];
+				a[j] = t;
+			}
+		}
+	}
+	for(i=0 ; i<n ; i++)
+		cout << a[i] << endl;
+
+	return 0;
+}
+	

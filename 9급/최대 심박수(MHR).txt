@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int age, pulse;
+	double MHR1, MHR2, MHR;
+	double det1, det2;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> age >> pulse;
+
+	MHR1 = 220 - age;
+	MHR2 = 206.3 - (0.711 * age);
+    MHR = (MHR1 + MHR2) / 2;
+	MHR = int(MHR * 10)/10;
+	det1 = int(MHR * 0.65 * 10)/10;
+	det2 = int(MHR * 0.85 * 10)/10;
+
+	//cout << MHR << " " << det1 << " " << det2 << endl;
+
+	if((4 * pulse >= det1) && (4 * pulse <= det2))
+		out << "good" << endl;
+	else
+		out << "bad" << endl;
+
+
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

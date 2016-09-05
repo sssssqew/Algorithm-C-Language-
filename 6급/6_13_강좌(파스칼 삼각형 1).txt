@@ -1,0 +1,29 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int i, j, n;
+	int term, em;
+	int a[10];
+
+	em = 3;
+	a[0] = 1;
+	for(i=1 ; i<10 ; i++)
+		a[i] = a[i-1] * i;
+
+	n = 10;
+	for(i=1 ; i<=n ; i++){
+		cout << endl;
+		for(j=1 ; j<=40-em*i; j++)
+			cout << " ";
+		for(j=1 ; j<=i ; j++){
+			term = a[i-1] / (a[j-1] * a[i-j]);
+			cout.width(em*2);
+			cout << term;
+		}
+	}
+	cout << endl << endl << endl;
+	return 0;
+}
+	

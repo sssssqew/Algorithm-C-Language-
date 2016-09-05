@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int mChick, fChick, bChick, money, total;
+	int i, j, eq;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> mChick >> fChick >> bChick >> money >> total;
+
+	for(i=1 ; i<= total-2 ; i++){
+		for(j=1 ; j<=total-i-1; j++){
+			if((total-i-j) % bChick == 0){
+				eq = mChick * i + fChick * j + (total-i-j)/bChick;
+				if(eq == money)
+					out << i << " " << j << " " << total-i-j << endl;
+			}
+		}
+	}
+	
+	in.close();
+	out.close();
+
+	return 0;
+}
+

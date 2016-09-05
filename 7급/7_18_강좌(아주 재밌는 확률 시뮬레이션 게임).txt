@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+int main(){
+	const int home = 0;
+	const int game = 100;
+	int i, pos, p, r;
+	pos = 50;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	cin >> p;
+
+	srand(time(NULL));
+	do{
+		r = rand()%101;
+		if(r <= p)
+			pos--;
+		else
+			pos++;
+		for(i=0 ; i<=100 ; i++){
+			if(i == home)
+				cout << "&";
+			else if(i == game)
+				cout << "$";
+			else if(i == pos)
+				cout << "@";
+			else
+				cout << "-";
+		}
+		cout << endl;
+	}while(pos != home && pos != game);
+
+	if(pos == home)
+		cout << "Áý µµÂø!!" << endl;
+	else if(pos == game)
+		cout << "¿À¶ô½Ç µµÂø!!" << endl;
+
+	return 0;
+}

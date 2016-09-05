@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+int bitCnt(int num);
+
+int main(){
+	int n, i;
+	int shift, dir;
+	double randNum, temp; 
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	srand(time(NULL));
+	n = rand()%20+10;
+
+	in >> randNum;
+
+	for(i=1 ; i<=n ; i++){		
+		temp = randNum;
+		dir = rand()%2+1;
+		shift = rand()%7+1;
+		if(dir == 1)
+			randNum = randNum / pow(10,shift);
+		else if(dir == 2)
+			randNum = fmod((randNum * pow(10,shift)), 
+						pow(10,bitCnt(randNum)));
+		randNum += temp;
+	}
+	cout << int(fmod(temp, 1000)) << endl;
+
+	return 0;
+}
+
+int bitCnt(int num){
+	int c = 0;
+	do{
+		num = num / 10;
+		c++;
+	}while(num != 0);
+	return c;
+}

@@ -1,0 +1,40 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int n, cnt = 0;
+	double score, min, max, total = 0, result;
+	min = 10; max = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+	int i = 0;
+	do{
+		in >> score;
+		if(score >= 0 && score <= 10){
+			total += score;
+			if(score > max)
+				max = score;
+			if(score < min)
+				min = score;
+		}
+		i++;
+	}while(i < n);
+	
+	result = (total - max - min)/(n - 2);
+	out.setf(ios::fixed);
+	out.precision(2);
+	out << result << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

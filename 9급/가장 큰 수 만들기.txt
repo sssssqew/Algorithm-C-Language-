@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+using namespace std;
+
+int main(){
+	int a, b, c, temp;
+ 
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> a >> b >> c;
+		if((a > 0 && a < 10) && (b > 0 && b < 10) && (c > 0 && c < 10))
+			break;
+	}while(true);
+
+	if(b < c){
+		temp = b; 
+		b = c; 
+		c = temp;
+	}
+	
+	if(a < b){
+		temp = a; 
+		a = b; 
+		b = temp;
+	}
+
+	if(b < c){
+		temp = b; 
+		b = c; 
+		c = temp;
+	}
+
+    out << 100 * a + 10 * b + c << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

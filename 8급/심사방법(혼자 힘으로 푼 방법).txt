@@ -1,0 +1,104 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int a, b, c, d, e, f, g, h, i, j;
+	int n, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	if(n >= 1){
+		for(a=1 ; a<=10 ; a++){
+			if(a!=1){
+				if(n == 1)
+					cnt++;
+				if(n >= 2){
+					for(b=1 ; b<=10 ; b++){
+						if(b!=2 && b!=a){
+							if(n == 2)
+								cnt++;
+							if(n >= 3){
+								for(c=1 ; c<=10 ; c++){
+									if(c!=3 && c!=a && c!=b){
+										if(n == 3)
+											cnt++;
+										if(n >= 4){
+											for(d=1 ; d<=10 ; d++){
+												if(d!=4 && d!=a && d!=b && d!=c){
+													if(n == 4)
+														cnt++;
+													if(n >= 5){
+														for(e=1 ; e<=10 ; e++){
+															if(e!=5 && e!=a && e!=b && e!=c && e!=d){
+																if(n == 5)
+																	cnt++;
+																if(n >= 6){
+																	for(f=1 ; f<=10 ; f++){
+																		if(f!=6 && f!=a && f!=b && f!=c && f!=d && f!=e){
+																			if(n == 6)
+																				cnt++;
+																			if(n >= 7){
+																				for(g=1 ; g<=10 ; g++){
+																					if(g!=7 && g!=a && g!=b && g!=c && g!=d && g!=e && g!=f){
+																						if(n == 7)
+																							cnt++;
+																						if(n >= 8){
+																							for(h=1 ; h<=10 ; h++){
+																								if(h!=8 && h!=a && h!=b && h!=c && h!=d && h!=e && h!=f && h!=g){
+																									if(n == 8)
+																										cnt++;
+																									if(n >= 9){
+																										for(i=1 ; i<=10 ; i++){
+																											if(i!=9 && i!=a && i!=b && i!=c && i!=d && i!=e && i!=f && i!=g && i!=h){
+																												if(n == 9)
+																													cnt++;
+																												if(n >= 10){
+																													for(j=1 ; j<=10 ; j++){
+																														if(j!=10 && j!=a && j!=b && j!=c && j!=d && j!=e && j!=f && j!=g && j!=h && j!=i){
+																															if(n == 10)
+																																cnt++;
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	out << cnt << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

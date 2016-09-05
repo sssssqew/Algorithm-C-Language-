@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, i, s, total;
+	n = 0; s = 0; total = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		s += i;
+		total += s;
+	}
+
+	out << total << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

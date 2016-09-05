@@ -1,0 +1,542 @@
+#include <iostream>
+#include <fstream>
+#define PeopleNum 4 
+using namespace std;
+
+int pickLargeNum(int x, int y);
+int add(int x, int y);
+
+int main()
+{
+	int hiker[PeopleNum], i, minTime2[36], minTime3[108], cnt2 = 0, cnt3 = 0, temp = 0;
+	hiker[0] = 5; hiker[1] = 2; hiker[2] = 10; hiker[3] = 1;
+
+	ofstream out("output.txt");
+    //initialize array
+	i = 0;
+	do{
+		minTime2[i] = 0;
+		i++;
+	}while(i < 36);
+
+	i = 0;
+	do{
+		minTime3[i] = 0;
+		i++;
+	}while(i < 108);
+    //people : i, i+1, i+2, i+3
+	i = 0;
+	do{
+		switch(i){
+		case 0:
+			//calculate time to go and come at first
+			temp = pickLargeNum(hiker[i],hiker[i+1]);
+			temp += hiker[i];
+            //1
+			//calculate time to go second time
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+2]);
+			//calculate time to come second time 
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			//calculate time to go at last 
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+3]);
+			cnt3++;
+			cnt2++;
+			//2
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+            //3
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+1]);
+			temp += hiker[i+1];
+			//4
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i+2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+            minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+3]);
+			cnt3++;
+			cnt2++;
+			//5
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+			//6
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+2]);
+			temp += hiker[i];
+            //7
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+3]);
+			cnt3++;
+			cnt2++;
+			//8
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+			//9
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+2]);
+			temp += hiker[i+2];
+            //10
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i+1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+3]);
+			cnt3++;
+			cnt2++;
+			//11
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+			//12
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i+3]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+3]);
+			temp += hiker[i];
+            //13
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+			//14
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+			//15
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i+2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+3]);
+			temp += hiker[i+3];
+            //16
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+3],hiker[i+1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+			//17
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+3],hiker[i+2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+3]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+3],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+			//18
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i+2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+3]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+3]);
+			cnt3++;
+			cnt2++;
+			break;
+		case 1:
+			temp = pickLargeNum(hiker[i],hiker[i+1]);
+			temp += hiker[i];
+            //19
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-1]);
+			cnt3++;
+			cnt2++;
+			//20
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+			//21
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+1]);
+			temp += hiker[i+1];
+            //22
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i+2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-1]);
+			cnt3++;
+			cnt2++;
+			//23
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+			//24
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+2]);
+			temp += hiker[i];
+            //25
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i+1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i-1]);
+			cnt3++;
+			cnt2++;
+			//26
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+			//27
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+2]);
+			temp += hiker[i+2];
+            //28
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i+1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-1]);
+			cnt3++;
+			cnt2++;
+			//29
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+2],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+2],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+			//30
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i+2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+2]);
+			cnt3++;
+			cnt2++;
+			break;
+		case 2:
+			temp = pickLargeNum(hiker[i],hiker[i+1]);
+			temp += hiker[i];
+            //31
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i-2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-2]);
+			cnt3++;
+			cnt2++;
+			//32
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i],hiker[i-2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-2],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-1]);
+			cnt3++;
+			cnt2++;
+			//33
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i-1],hiker[i-2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-2],hiker[i]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i]);
+			cnt3++;
+			cnt2++;
+
+			temp = pickLargeNum(hiker[i],hiker[i+1]);
+			temp += hiker[i+1];
+            //34
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i-1]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i-2]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-2]);
+			cnt3++;
+			cnt2++;
+			//35
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i+1],hiker[i-2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i+1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i+1],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-2],hiker[i-1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i-1]);
+			cnt3++;
+			cnt2++;
+			//36
+			minTime2[cnt2] = temp + pickLargeNum(hiker[i-1],hiker[i-2]);
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-1]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-1],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i-2]);
+			minTime3[cnt3] += pickLargeNum(hiker[i-2],hiker[i+1]);
+			cnt3++;
+			minTime3[cnt3] = add(minTime2[cnt2], hiker[i]);
+			minTime3[cnt3] += pickLargeNum(hiker[i],hiker[i+1]);
+			cnt3++;
+			cnt2++;
+			break;
+		}
+		i++;
+	}while(i < PeopleNum - 1);
+
+	cout << "------ all posibilities to go over the bridge ------------" << endl << endl;
+	int result = minTime3[0];
+	i = 0;
+	do{
+		if(minTime3[i] < result)
+			result = minTime3[i];
+		if(i%18 == 0 && i != 0)
+			cout << endl;
+		cout << minTime3[i] << " ";
+        i++;
+	}while(i < 108);
+	cout << endl << "----------------------------------------------------------" << endl;
+
+	cout << "minimum time : " << result << endl;
+	cout << "----------------------------------------------------------" << endl;
+
+	out << result << endl;
+	return 0;
+}
+
+int pickLargeNum(int x, int y){
+	if(x > y)
+		return x;
+	else
+		return y;
+};
+
+int add(int x, int y){
+	return (x + y);
+};
+
+
+	

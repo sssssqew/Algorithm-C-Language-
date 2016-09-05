@@ -1,0 +1,28 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int a[3], t, i;
+	float s, area;
+	bool flag;
+
+	a[0] = 3; a[1] = 4; a[2] = 5;
+	t = a[0] + a[1] + a[2];
+	flag = true;
+
+	for(i=0 ; i<=2 ; i++){
+		if(t - a[i] <= a[i])
+			flag = false;
+	}
+	if(flag){
+		s = t / 2;
+		area = sqrt(s * (s - a[0]) * (s - a[1]) * (s - a[2]));
+		cout << area << endl;
+	}
+
+
+	return 0;
+}
+	
+

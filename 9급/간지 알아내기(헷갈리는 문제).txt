@@ -1,0 +1,55 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+#define sheepPrice 10
+using namespace std;
+
+int main(){
+	//배열크기를 지정하면 마지막 인덱스에 NULL 또는 '\0' 저장됨
+	//비열크기 지정하지 않으면 마지막 인덱스에 문자 '0' 저장됨 
+	char gan[11] = {'0','1','2','3','4','5','6','7','8','9'};
+	char ji[13] = {'0','1','2','3','4','5','6','7','8','9','A','B'};
+	int year = 0, i , j, selectYear;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> selectYear;
+		if(selectYear >= 1 && selectYear<= 30000)
+			break;
+	}while(true);
+
+	//십이간지는 60번마다 반복되므로 60진법이며,
+	//60으로 나눈 나머지만큼만 반복하면 된다. 
+    selectYear = selectYear % 60;
+
+	i = 7; j = 9;
+	do{
+		year++;
+
+		if(year == selectYear){
+			out << gan[i] << ji[j] << endl;
+			break;
+		}
+		i++; j++;
+
+		if(*(gan + i) == NULL || *(ji + j) == NULL){
+			//순서 변경하면 값이 잘못 출력된다. 
+			if(*(gan + i) == NULL && *(ji + j) == NULL){
+				i = 0; j = 0;
+			}else if(*(gan + i) == NULL){
+				i = 0;
+			}else if(*(ji + j) == NULL){
+				j = 0;
+			}
+		}
+	}while(true);
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}

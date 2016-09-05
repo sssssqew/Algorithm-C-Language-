@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int n, data, avg, s, i;
+	s = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i = 0;i < n;i++){
+		in >> data;
+		s += data;
+	}
+	avg = s/n;
+
+	out << s << endl;
+	out << avg << endl;
+	return 0;
+}
+
+	
+   
+
+
+
+
+

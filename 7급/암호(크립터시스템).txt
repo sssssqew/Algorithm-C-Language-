@@ -1,0 +1,54 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string str, num;
+	int i, key, div, tmp;
+	bool up, low;
+	div = 1000; 
+	up = 0, low = 0;
+
+	getline(in, num);
+	getline(in, str);
+	
+	key = atoi(num.c_str());
+
+	for(i=0 ; i<str.length() ; i++){
+		up = str[i] >= 65 && str[i] <= 90;
+		low = str[i] >= 97 && str[i] <= 122;
+
+		if(up || low){
+			if(up){
+				str[i] = str[i] - 65;
+				up = 0;
+			}
+			if(low){
+				str[i] = str[i] - 97;
+				low = 0;
+			}
+			//KEY만큼 이동하기 쉽게 0~25 지점으로 보냄
+
+			key = key * key;
+			key = key % div;
+			tmp = key;
+			div = 1100 - div;
+			key = key / div; //KEY 생성 
+
+			str[i] = (str[i] + key) % 26; //KEY만큼 이동 
+			str[i] = str[i] + 65; //대문자로 변경
+
+			key = tmp;
+			div = 1100 - div;
+		}
+	}
+	out << str << endl;
+
+	return 0;
+}
+

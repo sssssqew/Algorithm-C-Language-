@@ -1,0 +1,38 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, temp, i;
+	bool flag = false;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=sqrt(n) ; i++){
+		temp = n;
+		if(i != 1){
+			while(temp % i == 0)
+				temp = temp / i;
+		}
+		if(temp == 1){
+			flag = true;
+			break;
+		}
+	}
+
+	if(flag)
+		out << "True" << endl;
+	else
+		out << "False" << endl;
+				
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

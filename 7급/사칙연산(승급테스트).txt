@@ -1,0 +1,65 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	char code;
+	string eq, term, n1, n2;
+	int i, j, k, p, n, s, re, cnt;
+
+	in >> n;
+
+	for(i=0 ; i<n ; i++){
+		in >> eq;
+		p = 0; s = 0; cnt = 0;
+		for(j=0 ; j<=eq.length() ; j++){
+			if(eq[j] == '+' || eq[j] == '-' || eq[j] == '\0'){
+				term = eq.substr(p, j-p);
+				p = j + 1;
+				//cout << term << endl;
+				re = 0;
+				for(k=0 ; k<term.length() ; k++){
+					if(term[k] == '*' || term[k] == '/'){
+						n1 = term.substr(0, k);
+						n2 = term.substr(k+1);
+						//cout << n1 << " " << n2 << endl;
+						
+						if(term[k] == '*')
+							re = atoi(n1.c_str()) * atoi(n2.c_str());
+						if(term[k] == '/')
+							re = atoi(n1.c_str()) / atoi(n2.c_str());
+						//cout << s << endl;
+					}
+				}
+				if(re == 0) re = atoi(term.c_str());
+
+				if(cnt == 0){ 
+					s += re;
+				}else{
+					if(code == '+') s += re;
+					if(code == '-') s -= re;
+				}
+
+				code = eq[j];
+				cnt++;
+			}
+		}
+		out << s << endl;
+	}
+	
+
+	return 0;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+
+using namespace std;
+
+int main(){
+	int n, i, j, p;
+	string str, Nstr;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> str;
+		Nstr = str;
+
+		j = 0; p = 0;
+		while(str[j] != NULL){
+			Nstr[p] = str[j];
+
+			if(str[j] != '#' && str[j] != '?')
+				p++;
+			if(str[j] == '#')
+				p--;
+			j++;
+		}
+		j = p;
+		while(Nstr[j] != NULL){
+			Nstr[j] = ' ';
+			j++;
+		}
+		cout << Nstr << endl;
+	}
+	
+	
+	return 0;
+}

@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, number, i, pick;
+	float rate, avgRate, min;
+	avgRate = 0; min = pow(10,8);
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> number >> rate;
+		avgRate += rate * 1000;
+	}
+	avgRate /= (n*1000);
+	avgRate = float(int(avgRate * 1000 + 0.5))/1000.0;
+
+	//파일을 닫았다가 다시 열면 파일 포인터가 처음으로 감 
+	in.close();
+	in.open("input.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> number >> rate;
+		//소수점끼리 빼니까 숫자가 너무 작아서 
+		//절대값이 그냥 제로가 나와서 결과가 잘못됨 
+		if(abs(1000*rate - 1000*avgRate) < min){
+			min = abs(1000*rate - 1000*avgRate);
+			pick = number;
+		}
+	}
+
+	out << pick << endl;
+	
+	return 0;
+}
+
+
+

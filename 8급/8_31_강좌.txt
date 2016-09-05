@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, j, n, data;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> data;
+
+		for(j=0 ; j<55-data/2 ; j++){
+			cout << " ";
+		}
+		for(j=0 ; j<data/2 ; j++){
+			cout << "@";
+		}
+		cout << " " << data;
+		cout << endl;
+	}
+	
+	return 0;
+}
+

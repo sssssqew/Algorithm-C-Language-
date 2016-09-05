@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int limitMin, limitMax, gap, min, max, y;
+    min = pow(10,8); max = pow(10,-8);
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> limitMin;
+	in >> limitMax;
+	in >> gap;
+
+	for(int i = limitMin;i <= limitMax;i+=gap){
+		y = 2 * i * i - 3 * i + 5;
+		if(y > max)
+			max = y;
+		if(y < min)
+			min = y;
+	}
+	out << max << endl;
+	out << min << endl;
+
+
+	return 0;
+}
+
+	
+   
+
+
+
+
+

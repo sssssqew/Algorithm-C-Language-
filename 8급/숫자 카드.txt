@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n1, card1, n2, card2, min, max;
+    int cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n1 >> card1;
+	in >> n2 >> card2;
+	in >> min >> max;
+
+	for(int i = 0;i <= card1;i++){
+		for(int j = 0;j <= card2;j++){
+			if(n1 * i + n2 * j >= min && n1 * i + n2 * j <= max)
+				cnt++;
+		}
+	}
+			
+	out << cnt++ << endl;
+
+
+	return 0;
+}
+
+	
+   
+
+
+
+
+

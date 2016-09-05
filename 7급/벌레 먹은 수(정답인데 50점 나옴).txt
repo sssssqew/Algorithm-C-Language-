@@ -1,0 +1,79 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int i, x, y, z, A, B, tmp;
+	bool f1, f2, f3;
+	double s = 0;
+	
+	in >> A >> B;
+
+	if(A > B){
+		tmp = A; A = B; B = tmp;
+	}
+    
+	for(i=A ; i<=B ; i++){
+		f1 = 0; f2 = 0; f3 = 0;
+		tmp = i;
+		//숫자를 두 자리 단위로 자름 
+		z = tmp % 100;
+		tmp = tmp / 100;
+		y = tmp % 100;
+		x = tmp / 100;
+
+		//10의 배수이면 0 제거 
+		if(x % 10 == 0){
+			x = x / 10;
+			f1 = 1;
+		}
+		if(y % 10 == 0){
+			y = y / 10;
+			f2 = 1;
+		}
+		if(z % 10 == 0){
+			z = z / 10;
+			f3 = 1;
+		}
+		//각 경우에 따라 x, y 자릿수 이동 
+		//x, y, z : 00, 0*, *0, ** (* : 0 제외한 수)
+		if(f2 == 0 && f3 == 1){
+			if(z != 0) 
+				y = y * 10;
+		}else if(f2 == 0 && f3 == 0){
+			if(z > 10) 
+				y = y * 100;
+		}
+
+		if(f1 == 0 && f2 == 1){
+			if(y != 0)
+				x = x * 10;
+		}else if(f1 == 0 && f2 == 0){
+			if(y > 10){
+				if(f3 == 1){
+					if(z == 0) 
+						x = x * 100;
+					else
+						x = x * 1000;
+				}else{
+					if(z < 10)
+						x = x * 100;
+					else
+						x = x * 10000;
+				}
+			}
+		}
+		s += x + y + z;
+	}
+	out.setf(ios::fixed);
+	out.precision(0);
+	out << s << endl;
+
+	return 0;
+}
+

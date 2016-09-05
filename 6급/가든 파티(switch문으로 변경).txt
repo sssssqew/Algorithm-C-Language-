@@ -1,0 +1,51 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int *water;
+	int i, j, fN, cN, from, to, cont, cnt;
+	cnt = 0; 
+
+	in >> fN;
+	in >> cN;
+
+	water = (int*)calloc(fN+1, sizeof(int));
+
+	for(i=1 ; i<=cN ; i++){
+		in >> from >> to >> cont;
+
+		for(j=from ; j<=to ; j++){
+			switch(cont){
+			case 0: 
+				water[j] = 1 - water[j];
+				break;
+			case 1:
+				if(j % 2 != 0) 
+					water[j] = 1 - water[j];
+				break;
+			case 2:
+				if(j % 2 == 0) 
+					water[j] = 1 - water[j];
+				break;
+			default:
+				if(j % cont == 0) 
+					water[j] = 1 - water[j];
+			}
+		}
+	}
+	for(i=1 ; i<=fN ; i++)
+		if(water[i]) cnt++;
+	
+	out << cnt << endl;
+
+	free(water);
+
+	return 0;
+}
+

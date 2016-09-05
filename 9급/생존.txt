@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int humanAlive, camelAlive, water, leaveDay;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> humanAlive;
+	in >> camelAlive;
+	in >> water;
+	in >> leaveDay;
+
+	if(humanAlive + water >= leaveDay)
+		out << 1 << " ";
+	else
+		out << 0 << " ";
+
+	if(camelAlive >= leaveDay)
+		out << 1 << endl;
+	else
+		out << 0 << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

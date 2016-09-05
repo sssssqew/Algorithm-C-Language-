@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	string voca, shiftVoca;
+	int i, scroll, shiftIndex;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> voca;
+	in >> scroll;
+
+	shiftVoca = voca;
+
+	i = 0;
+	while(voca[i] != NULL){
+		//이동한 인덱스를 단어길이로 나눈 나머지가 shiftIndex 
+		shiftIndex = (i + scroll) % voca.size();
+		shiftVoca[shiftIndex] = voca[i];
+		i++;
+	}
+	out << shiftVoca << endl;
+
+	return 0;
+}

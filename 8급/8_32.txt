@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int w, h, p, d;
+	int x, y, xd, yd;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> w >> h >> p >> d; 
+
+	x = p; y = 0;
+	
+	xd = d;
+	if(d == -1)
+		yd = -d;
+	else if(d == 1)
+		yd = d;
+
+	do{
+		x += xd;
+		y += yd;
+
+		if(x <= 0 || x >= w)
+			xd = -xd;
+		if(y >= h)
+			yd = -yd;
+	}while(y != 0);
+
+	out << x << endl;
+	
+	return 0;
+}
+

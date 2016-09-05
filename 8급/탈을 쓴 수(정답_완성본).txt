@@ -1,0 +1,158 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int e, n, v, i, l, f, t, s, w, y;
+	int eq1, eq2, c1, c2, eq3, c3, eq4, c4, eq5, c5, eq6, c6, eq7;
+	int five, seven, eleven, twelve, fifteen, twenty, seventy;
+	int select, cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> select;
+	//calculate (e,n,v,i,l,f,t,s,w,y) (sum1,carry1) (sum2,carry2) (sum3,carry3) (sum4,carry4) (sum5,carry5) (sum6,carry6)
+	for(e=0 ; e<=9 ; e++){
+		for(n=0 ; n<=9 ; n++){
+			if(e != n){
+				eq1 = e*2 + n*3;
+				if(eq1 % 10 == 0){
+					c1 = eq1 / 10;
+					for(v=0 ; v<=9 ; v++){
+						if(v != e && v != n){
+							eq2 = c1 + 3*e + 2*v;
+							if(eq2 % 10 == 0){
+								c2 = eq2 / 10;
+								for(i=0 ; i<=9 ; i++){
+									if(i != e && i != n && i != v){
+										for(l=0 ; l<=9 ; l++){
+											if(l != e && l != n && l != v && l != i){
+												eq3 = c2 + i + 2*v + l + e;
+												if(eq3 % 10 == 0){
+													c3 = eq3 / 10;
+													for(f=0 ; f<=9 ; f++){
+														if(f != e && f != n && f != v && f != i && f != l){
+															for(t=0 ; t<=9 ; t++){
+																if(t != e && t != n && t != v && t != i && t != l && t != f){
+																	eq4 = c3 + f + 3*e + t;
+																	if(eq4 % 10 == 0){
+																		c4 = eq4 / 10;
+																		for(s=0 ; s<=9 ; s++){
+																			if(s != e && s != n && s != v && s != i && s != l && s != f && s != t){
+																				for(w=0 ; w<=9 ; w++){
+																					if(w != e && w != n && w != v && w != i && w != l && w != f && w != t && w != s){
+																						eq5 = c4 + s + l + 2*w + f;
+																						if(eq5 % 10 == v){
+																							c5 = eq5 / 10;
+										
+																							eq6 = c5 + 2*t + i;
+																							if(eq6 % 10 == 0){
+																								c6 = eq6 / 10;
+																								
+																								eq7 = c6 + f;
+																								if(eq7 == s){
+																									for(y=0 ; y<=9 ; y++){
+																										if(y != e && y != n && y != v && y != i && y != l && y != f && y != t && y != s && y != w){
+																											//check if the sum is right 
+																											five = f*1000 + i*100 + v*10 + e;
+																											seven = s*10000 + e*1000 + v*100 + e*10 + n;
+																											eleven = e*100000 + l*10000 + e*1000 + v*100 + e*10 + n;
+																											twelve = t*100000 + w*10000 + e*1000 + l*100 + v*10 + e;
+																											fifteen = f*1000000 + i*100000 + f*10000 + t*1000 + e*100 + e*10 + n;
+																											twenty = t*100000 + w*10000 + e*1000 + n*100 + t*10 + y;
+																											seventy = s*1000000 + e*100000 + v*10000 + e*1000 + n*100 + t*10 + y;
+
+																											if(five + seven + eleven + twelve + fifteen + twenty == seventy){
+																												cout << "---------------------------------------------" << endl;
+																												cout << "(e,n,v,i,l,f,t,s,w,y) = " << "(" << e << "," << n << "," << v << "," 
+																												<< i << "," << l << "," << f << "," << t << "," << s << "," << w << "," << y << ")" << endl << endl;
+																												cout << "(sum1, carry1) = " << "(" << eq1 << "," << c1 << ")" << endl; 
+																												cout << "(sum2, carry2) = " << "(" << eq2 << "," << c2 << ")" << endl;
+																												cout << "(sum3, carry3) = " << "(" << eq3 << "," << c3 << ")" << endl;
+																												cout << "(sum4, carry4) = " << "(" << eq4 << "," << c4 << ")" << endl;
+																												cout << "(sum5, carry5) = " << "(" << eq5 << "," << c5 << ")" << endl;
+																												cout << "(sum6, carry6) = " << "(" << eq6 << "," << c6 << ")" << endl;
+																												cout << "(sum7) = " << "(" << eq7 << ")" << endl;
+																												cout << "---------------------------------------------" << endl;
+																												cnt++;
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	cout << "possibility : " << cnt << endl;
+	cout << "----------------- Result --------------------" << endl << endl;
+
+	cout << "\t   "  << five <<  endl;
+    cout << "\t  " << seven << endl; 
+	cout << "\t " << eleven << endl; 
+	cout << "\t " << twelve << endl;  
+	cout << "\t" << fifteen << endl; 
+	cout << "\t " << twenty << endl; 
+	cout << "    + __________" << endl;
+	cout << "\t" << seventy << endl << endl; 
+	cout << "---------------------------------------------" << endl;
+    
+	switch(select){
+		case 0:
+			out << "v" << endl;
+			break;
+		case 1:
+			out << "w" << endl;
+			break;
+		case 2:
+			out << "i" << endl;
+			break;
+		case 3:
+			out << "f" << endl;
+			break;
+		case 4:
+			out << "n" << endl;
+			break;
+		case 5:
+			out << "s" << endl;
+			break;
+		case 6:
+			out << "l" << endl;
+			break;
+		case 7:
+			out << "y" << endl;
+			break;
+		case 8:
+			out << "t" << endl;
+			break;
+		case 9:
+			out << "e" << endl;
+			break;
+	}
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

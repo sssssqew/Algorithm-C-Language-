@@ -1,0 +1,48 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+#define eps 10000
+using namespace std;
+
+int main(){
+	double a, b, c, t;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> a >> b >> c;
+		if((a > 0 && a <= eps) && (b > 0 && b <= eps) && (a > 0 && a <= eps))
+			break;
+	}while(true);
+
+	if(a > b){
+		t = a; a = b; b = t;
+	}
+	if(b > c){
+		t = b; b = c; c = t;
+	}
+	if(a > b){
+		t = a; a = b; b = t;
+	}
+
+	if(a + b > c){
+		if(a != b && b != c && c != a){
+			out << 3 << endl;
+		}else{
+			if(a == b && b == c && c == a)
+				out << 1 << endl;
+			else
+				out << 2 << endl;
+		}
+	}else{
+		out << 4 << endl;
+	}
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}

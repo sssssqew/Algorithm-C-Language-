@@ -1,0 +1,48 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#define pi 3.14159266 
+#define au 1.496*pow(10,13)
+using namespace std;
+
+double arcSec2deg(double s);
+double deg2rad(double d);
+double calParsec(double s);
+double absStarGrade(double p, double m);
+
+int main(){
+	double pc = 648000*au/pi;
+	double distES = au / pc;
+
+	cout.setf(ios::fixed);
+	cout << distES << endl;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+
+	return 0;
+}
+
+double arcSec2deg(double s){
+	double d;
+	d = s * (1.0/3600);
+	return d;
+}
+double deg2rad(double d){
+	double r;
+	r = d * (pi/180.0);
+	return r;
+}
+double calParsec(double s){
+	double p;
+	p = 1.0/s;
+	return p;
+}
+double absStarGrade(double p, double m){
+	double M;
+	M = m + 5 - 5 * log(p)/log(10);
+	return M;
+}
+

@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#include <time.h>
+using namespace std;
+
+int main(){
+	double A, B, C, D, E, F;
+	int cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> A >> B >> C >> D >> E >> F;
+
+	for(double i=0 ; i<6.4 ; i+=0.01){
+		double x = i * 70;
+		double ys = A * sin(B*i-C);
+		double yc = D * cos(E*i+F);
+		if(fabs(ys-yc) <= 4.5){
+			cnt++;
+			cout << ys << " " << yc << endl;
+		}
+	}
+	out << cnt << endl;
+
+	return 0;
+}
+

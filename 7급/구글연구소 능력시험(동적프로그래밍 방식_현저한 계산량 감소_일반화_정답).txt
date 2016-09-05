@@ -1,0 +1,38 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int n, temp, digit, unit, pos, s, find;
+	find = 3; unit = 0; pos = 1; s = 0;
+
+	cin >> n;
+	temp = n;
+		
+	do{
+
+		digit = temp % 10;
+		temp = temp / 10;
+
+		s += digit * unit;
+		unit = unit * 10 + pos;
+
+		if(digit > find)
+			s += pos;
+		if(digit == find)
+			s += n % pos + 1;
+
+		pos = pos * 10;
+
+	}while(temp != 0);
+
+	cout << s << endl;
+
+	return 0;
+}
+

@@ -1,0 +1,80 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, k, row, col, size, playNum, germ1, germ2, order;
+	int* board;
+
+	germ1 = 0; germ2 = 0;
+	 
+	in >> size;
+	board = (int*)malloc(sizeof(int)*size*size);
+
+	for(row=0 ; row<size ; row++){
+		for(col=0 ; col<size ; col++){
+			in >> board[row*size+col];
+			cout << board[row*size+col] << " ";
+			if(board[row*size+col] == 1) germ1++;
+			else if(board[row*size+col] == 2) germ2++;
+		}
+		cout << endl;
+	}
+	in >> playNum;
+	for(i=0 ; i<playNum ; i++){
+		in >> row >> col;
+		row = row - 1;
+		col = col - 1;
+		order = i % 2;
+		if(board[row*size+col] == 0){
+			board[row*size+col] = order+1;
+			
+			if(order+1 == 1) germ1++;
+			else if(order+1 == 2) germ2++;
+							
+			for(j=row-1 ; j<=row+1 ; j++){
+				for(k=col-1 ; k<=col+1 ; k++){
+					if((j>=0 && j<size) && (k>=0 && k<size)){
+						if(order+1 == 1){
+							if(board[j*size+k] == 2){
+								board[j*size+k] = order+1;
+								germ1++; germ2--;
+							}
+						}
+						else if(order+1 == 2){
+							if(board[j*size+k] == 1){
+								board[j*size+k] = order+1;
+								germ2++; germ1--;
+							}
+						}
+					}
+				}
+			}
+		}
+		if(germ1 == 0 || germ2 == 0 || germ1+germ2 == size*size) break;	
+	}
+	
+	cout << endl;
+	for(row=0 ; row<size ; row++){
+		for(col=0 ; col<size ; col++){
+			cout << board[row*size+col] << " ";
+		}
+		cout << endl;
+	}
+	
+	cout << germ1 << " " << germ2 << endl;
+
+	if(germ1 == germ2) out << 0 << endl;
+	else if(germ1 > germ2) out << 1 << endl;
+	else if(germ1 < germ2) out << 2 << endl;
+
+	free(board);
+	return 0;
+}
+
+	
+	

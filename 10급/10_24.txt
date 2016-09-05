@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	int n,a,f;
+	double s;
+	s = 0; f = 1; n = 0;
+
+	cin >> a;
+
+	do{
+		n++;
+		f *= n;
+		s += (double)n/f;
+	}while(n < a);
+
+	cout << s << endl;
+
+	return 0;
+}
+	

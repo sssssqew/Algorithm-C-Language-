@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int tea, cookie, money;
+	int i, cnt, diff;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> tea >> cookie >> money;
+
+	for(i=0 ; i<=100 ; i++){
+		diff = money - tea*i;
+		if(diff >= 0 && diff % cookie == 0)
+			cnt++;
+	}
+
+	out << cnt << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

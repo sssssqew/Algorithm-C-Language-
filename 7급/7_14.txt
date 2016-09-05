@@ -1,0 +1,21 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, scope, num, order;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n >> scope >> num;
+
+	order = (scope * (num - 1)) % n + 1;
+
+	out << order << endl;
+
+	return 0;
+}
+

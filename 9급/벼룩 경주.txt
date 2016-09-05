@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+#define eps 1000
+using namespace std;
+
+int main(){
+	int fleaNum, n, pick;
+	double jump, min, exam;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> fleaNum;
+		if(fleaNum >= 1 && fleaNum <= 100)
+			break;
+	}while(true);
+
+	min = eps;
+    int i = 1;
+	do{
+		in >> jump;
+		if(jump >= 0 && jump <= 100){
+			n = eps / jump;
+			exam = jump * (n + 1) - eps;
+			if(exam < min){
+				min = exam;
+				pick = i ;
+			}
+		}
+		i++;
+	}while(i <= fleaNum);
+
+	out << pick << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

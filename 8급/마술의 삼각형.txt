@@ -1,0 +1,52 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int a, b, c, d, e, f;
+	int n, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(a=1 ; a<=n ; a++){
+			for(b=1 ; b<=n ; b++){
+				if(b != a){
+					for(c=1 ; c<=n ; c++){
+						if(c != a && c != b){						
+							for(d=1 ; d<=n ; d++){
+								if(d != a && d != b && d != c){								
+									for(e=1 ; e<=n ; e++){
+										if(e != a && e != b && e != c && e != d){										
+											for(f=1 ; f<=n ; f++){
+												if(f != a && f != b && f != c && f != d && f != e){
+													if((a + b + c) == (c + d + e) && (c + d + e) == (e + f + a)){
+														cnt++;
+														cout << "cnt " << cnt << " : "<< a << " " << b << " " << c 
+														<< " " << d << " " << e << " " << f << endl;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	out << cnt << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

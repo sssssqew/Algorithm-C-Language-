@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int i, n, san;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+    in >> n;
+
+	i = 0;
+	do{
+		if((n - 3 * i) % 4 == 0){
+			san = (n - 3 * i) / 4;
+			out << san << endl;
+			break;
+		}
+		i++;
+	}while(true);
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,26 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int i, j, n;
+	int term, em;
+
+	em = 4;
+	n = 10;
+
+	for(i=1 ; i<=n ; i++){
+		term = 1;
+		cout << endl;
+		for(j=1 ; j<=115-em*i; j++)
+			cout << " ";
+		for(j=1 ; j<=i ; j++){
+			cout.width(em*2);
+			cout << term;
+			term = term * (i-j) / j;
+		}
+	}
+	cout << endl << endl << endl;
+	return 0;
+}
+	

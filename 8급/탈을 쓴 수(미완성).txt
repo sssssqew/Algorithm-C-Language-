@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int e, n, v, i, l;
+	int eq1, eq2, c1, c2, eq3, c3;
+	int cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	//calculate (e,n,v,i,l) (sum1,carry1) (sum2,carry2) (sum3,carry3)
+	for(e=0 ; e<=9 ; e++){
+		for(n=0 ; n<=9 ; n++){
+			if(e != n){
+				eq1 = e*2 + n*3;
+				if(eq1 % 10 == 0){
+					c1 = eq1 / 10;
+					for(v=0 ; v<=9 ; v++){
+						if(v != e && v != n){
+							eq2 = c1 + 3*e + 2*v;
+							if(eq2 % 10 == 0){
+								c2 = eq2 / 10;
+								//cout << "(e,n,v) = " << "(" << e << "," << n << "," << v << ")" << "  "
+								//<< "(sum1, carry1) = " << "(" << eq1 << "," << c1 << ")" << "  " 
+								//<< "(sum2, carry2) = " << "(" << eq2 << "," << c2 << ")" << endl;
+								for(i=0 ; i<=9 ; i++){
+									if(i != e && i != n && i != v){
+										for(l=0 ; l<=9 ; l++){
+											if(l != e && l != n && l != v && l != i){
+												eq3 = c2 + i + 2*v + l + e;
+												if(eq3 % 10 == 0){
+													c3 = eq3 / 10;
+													cout << "---------------------------" << endl;
+													cout << "(e,n,v,i,l) = " << "(" << e << "," << n << "," << v << "," << i << "," << l << ")" << endl;
+								                    cout << "(sum1, carry1) = " << "(" << eq1 << "," << c1 << ")" << endl; 
+								                    cout << "(sum2, carry2) = " << "(" << eq2 << "," << c2 << ")" << endl;
+													cout << "(sum3, carry3) = " << "(" << eq3 << "," << c3 << ")" << endl;
+													cout << "---------------------------" << endl;
+													cnt++;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	cout << "possibility : " << cnt << endl << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define wordlen 10
+#define classNum 9
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int rot[100][100];
+	int i, j, n, row, col;
+
+	in >> n;
+
+	for(i=0 ; i<n ; i++){
+		for(j=0 ; j<n ; j++){
+			row = j;
+			col = (i+j) % n;
+			rot[row][col] = i+1;
+		}
+	}
+	for(i=0 ; i<n ; i++){
+		for(j=0 ; j<n ; j++)
+			out << rot[i][j] << " ";
+
+		out << endl;
+	}
+
+	return 0;
+}

@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int a[9], n;
+	int i, j, t;
+	a[0] = 55; a[1] = 33; a[2] = 99; a[3] = 33; a[4] = 55;
+	a[5] = 33; a[6] = 99; a[7] = 77; a[8] = 11;
+	n = 9;
+
+	cout << "source data--->";
+	for(i=0 ; i<n ; i++)
+		cout << a[i] << " " ;
+	cout << endl;
+
+	for(i=0 ; i<n-1; i++){
+		for(j=i+1 ; j<n ; j++){
+			if(a[i] > a[j]){
+				t = a[i];
+				a[i] = a[j];
+				a[j] = t;
+			}
+		}
+	}
+	cout << "sorted data--->";
+	for(i=0 ; i<n ; i++)
+		cout << a[i] << " ";
+	cout << endl;
+
+	return 0;
+}
+	

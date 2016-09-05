@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+using namespace std;
+
+int main(){
+	int n, data;
+	int min, max;
+	min = 32767; max = -32767;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	int i = 0;
+	do{
+		in >> data;
+		if(data < min)
+			min = data;
+		if(data > max)
+			max = data;
+		i++;
+	}while(i < n);
+
+	out << max << endl;
+    out << min << endl;
+	out << max - min << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+int main(){
+	int hour;
+	double rad;
+	double pi = 3.14159266;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> hour;
+
+	if(hour != 12)
+		rad = (double)hour * (pi/6);
+	else
+		rad = 0;
+
+	rad = double(int(rad * pow(10,5) + 0.5)) / pow(10,5);
+	out << rad << endl;
+
+	return 0;
+}
+

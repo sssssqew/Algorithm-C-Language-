@@ -1,0 +1,50 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string mod, num;
+	int i, bit, mo, nu, w, r, p;
+	mo = 0; nu = 0;
+
+	in >> mod;
+	in >> num;
+
+	for(i=0 ; i<mod.length() ; i++){
+		bit = mod[i] - 48;
+		w = mod.length()-1-i;
+		mo += bit * pow(2, w);
+	}
+	for(i=0 ; i<num.length() ; i++){
+		bit = num[i] - 48;
+		w = (num.length()-1-i) + (mod.length()-1);
+		nu += bit * pow(2, w);
+	}
+	cout << "mod10 : " << mo << endl;
+	cout << "num10 : " << nu << endl;
+
+	r = nu % mo;
+
+	cout << "remainder10 : " << r << endl;
+
+	p = num.length();
+	num += mod;
+
+	for(i=0 ; i<mod.length() ; i++){
+		bit = r % 2;
+		r = r / 2;
+		w = num.length() - 1 - i;
+		num[w] = bit + 48;
+	}
+	cout << "transmit : " << num << endl;
+	cout << "remainder2 : " << num.substr(p) << endl;
+
+	out << num << endl;
+
+	return 0;
+}

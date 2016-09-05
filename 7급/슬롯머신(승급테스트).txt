@@ -1,0 +1,51 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int cal(int n);
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int n1, n2, n3, fund, money, tri, reward, invest;
+
+	in >> n1 >> n2 >> n3 >> fund >> money >> tri;
+	invest = money;
+	for(int i=0 ; i<tri ; i++){
+		fund += 10;
+		money -= 10;
+
+		n1 = cal(n1);
+		n2 = cal(n2);
+		n3 = cal(n3);
+
+		if(n1 == n2 && n2 == n3){
+			reward = int((fund / 2) / 10 + 0.5)*10;
+			fund -= reward;
+			money += reward;
+		}
+
+		if(money <= 0) break;
+	}
+	out << money - invest << endl;
+
+
+	return 0;
+}
+
+int cal(int n){
+	int e, r;
+	e = (n * 12345 + 8)*(n * 12345 + 8) - 7;
+	r = e % 10;
+	return r;
+}
+
+
+
+
+
+
+

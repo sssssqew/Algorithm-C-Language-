@@ -1,0 +1,64 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string table;
+	bool L1 = 0, L2 = 0;
+	int i, f, s, score;
+	score = 0; 
+
+	in >> table;
+
+	//추가점수는 Spare(/), Strike(X)이 나오면 얻는다
+	//9 프레임까지의 Spare(/), Strike(X)만 추가점수에 영향을 준다 
+	for(i=0 ; i<table.length() ; i++){
+		if(table[i] != 'G' && table[i] != 'B' && table[i] != '-'){
+			if(i >= 3)
+				cout << char(s) << " " << char(f) << " " << table[i] << endl;
+			if(table[i] == '/'){
+				score += 10 - (f - 48);
+
+				if(s == 'X' && L2 == 0)
+					score += 10 - (f - 48);
+			}else if(table[i] == 'X'){
+				score += 10;
+
+				if(L1 == 0){
+					if(f == '/')
+						score += 10;
+					if(f == 'X')
+						score += 10;
+				}
+				if(s == 'X' && L2 == 0)
+					score += 10;
+			}else{
+				score += table[i] - 48;
+
+				if(L1 == 0){
+					if(f == '/')
+						score += table[i] - 48;
+					if(f == 'X')
+						score += table[i] - 48;
+				}
+				if(s == 'X' && L2 == 0)
+					score += table[i] - 48;
+			}
+			if(i > 0) s = f;
+			f = table[i];
+
+			//플래그가 1 이면 10 프레임을 의미한다 
+			if(i >= 18) L1 = 1;
+			if(i >= 19) L2 = 1;
+		}
+	}
+	out << score << endl;
+
+	return 0;
+}
+

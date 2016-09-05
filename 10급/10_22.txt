@@ -1,0 +1,26 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	int s,n;
+	int small, large;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> small >> large;
+
+	s = 0; n = small;
+
+	do{
+		s += n;
+		n++;
+	}while(n <= large);
+
+	out << s << endl;
+
+	return 0;
+}
+	

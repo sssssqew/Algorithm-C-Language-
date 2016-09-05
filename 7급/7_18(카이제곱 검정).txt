@@ -1,0 +1,30 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+int main(){
+	int num, i;
+	float chi, exp, d;
+	chi = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> num;
+	exp = (float)num / 6;
+
+	for(i=1 ; i<=6 ; i++){
+		in >> d;
+		chi += (d-exp)*(d-exp);
+	}
+	chi = chi / exp;
+	if(chi < 15.0863)
+		out << "OK" << endl;
+	else
+		out << "NG" << endl;
+
+	return 0;
+}

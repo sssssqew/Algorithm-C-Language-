@@ -1,0 +1,38 @@
+#include <iostream>
+#include <fstream>
+
+#define TOTAL 150
+#define COIN 100
+using namespace std;
+
+int main(){
+	int book, roughD, zong, zongOnly;
+	int quota, remainder;
+	double distance;
+	 
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> book >> zong;
+    //북은 10리를 더 갈때마다 3번씩 더 친다. 
+	//북을 친 횟수를 3으로 나누면 몫만큼 10리를 더 간다. 
+	//그리고 나머지만큼 5리를 간다. 
+	quota = book/3;
+	remainder = book%3;
+	//실제 이동한 거리는 북을 친 횟수로 계산한 값보다 크거나 같다. 
+    roughD = quota * 10 + remainder * 5;
+	//북이 칠때 실제로 종은 치지 않지만 이렇게 되면 규칙적이지 않아
+	//위의 방법처럼 거리를 계산할 수 없게 된다. 
+	//북으로 계산한 거리를 5로 나눠주면 5리가 몇번 반복되었는지 알수 있고
+	//5리마다 종도 함께 쳤다면 그때마다 2번씩 종소리가 더 울렸을 것이다. 
+	zongOnly = zong + roughD/5 * 2;
+	//북과 같은 원리로 거리를 계산할 수 있게 되었다.
+	quota = zongOnly/3;
+	remainder = zongOnly%3;
+
+	distance = quota * 1 + remainder * 0.5;
+    if(distance >= roughD)
+		out << distance << endl;
+
+	return 0;
+}

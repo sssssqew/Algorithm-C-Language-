@@ -1,0 +1,53 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, k, el;
+	int rN1, cN1, rN2, cN2;
+	int *A, *B, *C;
+
+	in >> rN1 >> cN1;
+	in >> rN2 >> cN2;
+
+	A = (int*)calloc(rN1*cN1, sizeof(int));
+	B = (int*)calloc(rN2*cN2, sizeof(int));
+	C = (int*)calloc(rN1*cN2, sizeof(int));
+
+	//행열의 각 요소 저장하기 
+	for(i=0 ; i<rN1*cN1 ; i++){
+		in >> el;
+		A[i] = el;
+	}
+	for(i=0 ; i<rN2*cN2 ; i++){
+		in >> el;
+		B[i] = el;
+	}
+
+	//C의 행과 열의 수 : 행 => A의 행의 수, 열 => B의 열의 수 
+	//C(i, j) = A(i, k) * B(k, j) : k <= cN1(rN1)
+	for(i=0 ; i<rN1 ; i++){
+		for(j=0 ; j<cN2 ; j++){
+			for(k=0 ; k<cN1 ; k++)
+				C[i*cN2+j] += A[i*cN1+k] * B[k*cN2+j]; 
+		}
+	}
+	//곱셈 결과 출력하기 
+	for(i=0 ; i<rN1 ; i++){
+		for(j=0 ; j<cN2 ; j++)
+			out << C[i*cN2+j] << " ";
+		out << endl;
+	}
+
+	free(A);
+	free(B);
+	free(C);
+
+	return 0;
+}
+

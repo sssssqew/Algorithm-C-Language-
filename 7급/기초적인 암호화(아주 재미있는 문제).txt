@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+char lowerCase(char c);
+
+int main(){
+	string subs, code;
+	int i, j;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	getline(in,subs);
+	getline(in, code);
+
+	i = 0;
+	while(code[i] != NULL){
+		code[i] = lowerCase(code[i]);
+		if(code[i] >= 97 && code[i] <= 122){
+			j = 0;
+			while(subs[j] != NULL){
+				if(code[i] == subs[j])
+					break;
+				else 
+					j++;
+			}
+			code[i] = 97 + j;
+		}
+		i++;
+	}
+	out << code << endl;
+
+
+	return 0;
+}
+
+char lowerCase(char c){
+	if(c >= 65 && c <= 90)
+		return c + 32;
+	else
+		return c;
+}
+----------------------------------------------------------(ют╥б)
+khocgimfebqradjtslnvpxuzwy
+npDmWjdM En xGLw mgDePN 

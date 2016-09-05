@@ -1,0 +1,47 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+int randNum(int n);
+
+int main(){
+	int num1, num2, num3, reduce, invest;
+	int asset, tries;
+	double fund;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> num1 >> num2 >> num3 
+		>> fund >> asset >> tries;
+	invest = asset;
+
+	for(int i=1 ; i<=tries ; i++){
+		fund += 10;
+		asset -= 10;
+
+		num1 = randNum(num1);
+		num2 = randNum(num2);
+		num3 = randNum(num3);
+		
+		if(num1 == num2 && num2 == num3){
+			reduce = int((fund/2)/10+0.5)*10;
+			fund -= reduce;
+			asset += reduce;
+		}
+		if(asset <= 0)
+			break;
+	}
+	//ÅõÀÚ ´ëºñ È¹µæÇÑ ±Ý¾× 
+	out << asset - invest << endl;
+
+	return 0;
+}
+
+int randNum(int n){
+	int eq = (1234*n+8)*(1234*n+8)-7;
+	return eq % 10;
+}

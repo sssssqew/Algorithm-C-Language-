@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int n, i, s, r, temp, cnt;
+	s = 0; cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=100 ; i<=999 ; i++){
+		temp = i;
+
+		do{
+			r = temp % 10;
+			s += r;
+			temp = temp / 10;
+		}while(temp != 0);
+
+		if(s == n)
+			cnt++;
+
+		s = 0;
+	}
+	out << cnt << endl;
+	
+	in.close();
+	out.close();
+
+	return 0;
+}
+

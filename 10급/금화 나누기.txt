@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+void main(){
+	int bread1, bread2, coin;
+	int share1, share2, coin1, coin2;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> bread1 >> bread2;
+	in >> coin;
+
+	share1 = bread1 * 3 - (bread1 + bread2);
+	share2 = bread2 * 3 - (bread1 + bread2);
+	coin1 = coin * share1 / (share1 + share2);
+	coin2 = coin * share2 / (share1 + share2);
+
+	out << coin1 << " " << coin2 << endl;
+
+	in.close();
+	out.close();
+}

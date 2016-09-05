@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int n, i;
+	double eyeGrade, dpc, absGrade;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	out.setf(ios::fixed);
+	out.precision(2);
+
+	for(i=1 ; i<=n ; i++){
+		in >> eyeGrade >> dpc;
+		absGrade = eyeGrade + 5 - 5*log(dpc)/log(10);
+		out << absGrade << endl;
+	}
+
+	return 0;
+}
+
+
+

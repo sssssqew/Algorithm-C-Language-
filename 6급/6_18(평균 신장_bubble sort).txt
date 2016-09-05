@@ -1,0 +1,71 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, group, people, t;
+	int *pOrder, *rank;
+	float *height, *avgHeight, min, max, f;
+
+	in >> group;
+	pOrder = (int*)malloc(sizeof(int)*group);
+	rank = (int*)malloc(sizeof(int)*group);
+	avgHeight = (float*)malloc(sizeof(float)*group);
+
+	for(i=0 ; i<group ; i++){
+		in >> people;
+		avgHeight[i] = 0; 
+		min = 300; max = 0;
+		
+		//allocate memory by people in the group
+		height = (float*)malloc(sizeof(float)*people);
+		
+		//read height of players from file 
+		for(j=0 ; j<people ; j++){
+			in >> height[j];
+			avgHeight[i] += height[j];
+			if(height[j] < min) min = height[j];
+			if(height[j] > max) max = height[j];
+		}
+
+		//calculate average height of players except max or min height
+		avgHeight[i] = avgHeight[i] - (min + max);
+		avgHeight[i] = avgHeight[i] / (float)(people-2);
+		
+		free(height);
+	}
+	for(i=0 ; i<group ; i++){
+		pOrder[i] = i+1; rank[i] = i+1;
+	}
+
+	for(i=1 ; i<=group-1 ; i++){
+		for(j=0 ; j<group-i ; j++){
+			if(avgHeight[j] < avgHeight[j+1]){
+				f = avgHeight[j]; avgHeight[j] = avgHeight[j+1]; avgHeight[j+1] = f;
+				t = pOrder[j]; pOrder[j] = pOrder[j+1]; pOrder[j+1] = t;
+			}
+		}
+	}
+	for(i=1 ; i<=group-1 ; i++){
+		for(j=0 ; j<group-i ; j++){
+			if(pOrder[j] > pOrder[j+1]){
+				t = pOrder[j]; pOrder[j] = pOrder[j+1]; pOrder[j+1] = t;
+				t = rank[j]; rank[j] = rank[j+1]; rank[j+1] = t;
+			}
+		}
+	}
+	for(i=0 ; i<group ; i++) out << rank[i] << endl;
+
+	free(pOrder);
+	free(rank);
+	free(avgHeight);
+
+	return 0;
+}
+
+	
+	

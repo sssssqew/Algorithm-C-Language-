@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	double onePiece, length;
+	int num, q, r, bamboo;
+	bamboo = 0; r = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> onePiece;
+	in >> num;
+
+	for(int i=1; i<=num ; i++){
+		in >> length;
+		q = floor(length/onePiece);
+		r += length - q*onePiece;
+		bamboo += q;
+	}
+	out << bamboo << endl;
+	out << r << endl;
+
+	return 0;
+}
+

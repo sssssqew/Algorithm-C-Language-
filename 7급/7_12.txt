@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int i, d, cnt;
+	float scope, cloud;
+	cnt = 0; scope = 100;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	for(i=1 ; i<=scope ; i++){
+		in >> d;
+		if(d == 1)
+			cnt++;
+	}
+	cloud = (float)cnt / 10.0;
+	cloud = int(cloud + 0.5);
+	out << cloud << endl;
+
+	
+	return 0;
+}
+
+
+

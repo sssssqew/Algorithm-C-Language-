@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, n, p;
+	bool f1, f2;
+	f1 = 0; f2 = 0;
+
+	in >> n >> p;
+
+	for(i=2 ; i<=p/2 ; i++){
+		if(p % i == 0 && p != 2){
+			f1 = 1;
+			break;
+		}
+	}
+	if(n % p == 0) f2 = 1;
+
+	if(!f1 && !f2) 
+		out << "True" << endl;
+	else 
+		out << "False" << endl;
+
+	return 0;
+}

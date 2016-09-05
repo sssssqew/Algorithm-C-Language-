@@ -1,0 +1,50 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int a[100] = {0, };
+	int i, j, n, d, num, dec, data, tmp, f;
+	f = 0;
+
+	in >> n;
+	for(i=0 ; i<n ; i++){
+		in >> d;
+		a[i] = d;
+	}
+	in >> num;
+	for(i=0 ; i<num ; i++){
+		in >> dec >> data;
+		if(dec){
+			for(j=0 ; j<n ; j++){
+				if(data < a[j]){
+					tmp = data;
+					data = a[j];
+					a[j] = tmp;
+				}
+			}
+			a[j] = data;
+			n = n + 1;
+		}else{
+			for(j=0 ; j<n ; j++){
+				if(data == a[j]){
+					tmp = a[j];
+					a[j] = a[j+1];
+					a[j+1] = tmp;
+					f = 1;
+				}
+			}
+			if(f) n = n - 1;
+		}
+	}
+	for(i=0 ; i<n ; i++)
+		cout << a[i] << " ";
+	cout << endl;
+
+	return 0;
+}

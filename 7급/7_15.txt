@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+int main(){
+	int a, x, b, m;
+	int n, i;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+	in >> a >> x >> b >> m;
+
+	for(i=1 ; i<=n ; i++){
+		x = (a*x+b) % m;
+	}
+	out << x << endl;
+
+	return 0;
+}
+

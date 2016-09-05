@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, p, e;
+	double x, y, step;
+	x = 0; y = 0; step = 10000; p = 1; e = 1;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	i = 0;
+	do{
+		if(i % 2 == 0)
+			y += p * step;
+		else
+			x += p * step;
+
+		step *= 0.9;
+		i++;
+
+		if(i % 2 == 0)
+			p = -p;
+	}while(step > e);
+
+	cout << int(y) << " " << int(x) << endl;
+
+	return 0;
+}
+

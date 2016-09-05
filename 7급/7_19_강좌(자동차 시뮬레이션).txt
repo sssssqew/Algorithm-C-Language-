@@ -1,0 +1,47 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+#define left 1
+#define right 50
+#define delay 50000000
+using namespace std;
+
+int main(){
+	int i, pos, r, p;
+	pos = right / 2;
+
+	string car = " !-[o]-! ";
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	srand(time(NULL));
+
+	i = 0;
+	do{
+		p = rand()%right+1;
+		r = rand()%right+1;
+
+		if(r >= p)
+			pos++;
+		else
+			pos--;
+
+		for(i=1 ; i<=right ; i++){
+			if(i == left)
+				cout << "||";
+			else if(i == pos)
+				cout << car;
+			else if(i == right)
+				cout << "||";
+			else
+				cout << " ";
+		}
+		cout << endl;
+		for(i=1 ; i<=delay ; i++){}
+	}while(pos != left && pos != right);
+
+	return 0;
+}

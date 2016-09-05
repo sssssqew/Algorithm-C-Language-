@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int dataNum, angle1, angle2, angle3;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> dataNum;
+	int i = 0;
+	do{
+		in >> angle1 >> angle2 >> angle3;
+		if((angle1 + angle2 + angle3) == 180){
+			if(angle1 > 90 || angle2 > 90 || angle3 > 90)
+				out << 1 << endl;
+			else if(angle1 == 90 || angle2 == 90 || angle3 == 90)
+				out << 2 << endl;
+			else
+				out << 3 << endl;
+		}
+		i++;
+	}while(i < dataNum);
+
+	in.close();
+	out.close();
+
+	return 0;
+}

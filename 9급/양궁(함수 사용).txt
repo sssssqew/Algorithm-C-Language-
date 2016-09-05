@@ -1,0 +1,71 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int calScore(int x, int kind);
+
+int main(){
+	int n, r, p, score = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> p;
+		if(p == 18 || p == 25)
+			break;
+	}while(true);
+	do{
+		in >> n;
+		if(n >= 1 && n <= 30)
+			break;
+	}while(true);
+
+	int i=0;
+	do{
+		in >> r;
+		if(p == 18){
+			if(r >=0 && r <= 20)
+				score += calScore(r,2);
+		}else if(p == 25){
+			if(r >=0 && r <= 30)
+				score += calScore(r,3);
+		}
+		i++;
+	}while(i < n);
+
+	out << score << endl;
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+int calScore(int x, int kind){
+	int re;
+	if(x >= 0 && x < kind)
+		re = 10;
+	else if(x >= kind && x < 2*kind)
+		re = 9;
+	else if(x >= 2*kind && x < 3*kind)
+		re = 8;
+	else if(x >= 3*kind && x < 4*kind)
+		re = 7;
+	else if(x >= 4*kind && x < 5*kind)
+		re = 6;
+	else if(x >= 5*kind && x < 6*kind)
+		re = 5;
+	else if(x >= 6*kind && x < 7*kind)
+		re = 4;
+	else if(x >= 7*kind && x < 8*kind)
+		re = 3;
+	else if(x >= 8*kind && x < 9*kind)
+		re = 2;
+	else
+		re = 1;
+	return re;
+};

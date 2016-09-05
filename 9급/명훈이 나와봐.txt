@@ -1,0 +1,34 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	string saying[] = {"¸íÈÆÀÌ ³ª¿ÍºÁ!", "¸íÈÆÀÌ µé¾î°¡!", "¸íÈÆÀÌ ¾É¾Æ!"};
+    int sayNum, sayData;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> sayNum;
+
+	int i = 0;
+	do{
+		in >> sayData;
+		if(sayData == 1)
+			out << saying[0] << endl;
+		else if(sayData == 2)
+			out << saying[1] << endl;
+		else if(sayData == 3)
+			out << saying[2] << endl;
+		i++;
+	}while(i < sayNum);
+
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

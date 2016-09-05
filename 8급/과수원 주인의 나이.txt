@@ -1,0 +1,43 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int mult;
+	int i, j, k, age, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> mult;
+
+	for(i=1 ; i<=200 ; i++){
+		for(j=1 ; j<=200 ; j++){
+			if(mult % (i*j) == 0){
+				k = mult / (i*j);
+				if(k >= 1 && k <= 200){
+					if((i + j + k) % 2 == 0){
+						age = (i + j + k)/2;
+						if(age >= 1 && age <= 200){
+							if(i <= age && j <= age && k <= age)
+								break;
+								
+						}
+					}
+				}
+			}
+		}
+		if(i <= age && j <= age && k <= age)
+			break;
+	}
+	out << age << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

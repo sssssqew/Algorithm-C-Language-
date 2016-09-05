@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int day, n;
+	n = 1;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> day;
+
+	for(int i = 1;i <= day;i++){
+		n = n * i;
+	}
+
+	out << n << endl;
+	return 0;
+}
+
+	
+   
+
+
+
+
+

@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, j, year, export, import;
+	int ex, im;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	out << "                         * 우리나라의 수출입 1977~2001 *                       " << endl << endl;
+	out << "                                " << "수출" << "  " << "연도" << "  " << "수입" << "\t" << "(백만$)" << endl;
+	out << "----------------------------------------------------------------------------" << endl; 
+
+	for(i=1 ; i<=5 ; i++){
+		in >> year >> export >> import;
+
+		ex = export / 7000;
+		im = import / 7000;
+
+		for(j=0 ; j<30-ex ; j++){
+			out << " ";
+		}
+		out << export << " ";
+		for(j=0 ; j<ex ; j++){
+			out << "$";
+		}
+		out << " " << year << " ";
+		for(j=0 ; j<im ; j++){
+			out << "$";
+		}
+		out << " " << import << endl;
+	}
+	
+	return 0;
+}
+

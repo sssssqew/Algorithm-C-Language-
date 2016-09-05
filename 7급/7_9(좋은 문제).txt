@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#define compare 2002
+using namespace std;
+
+int commDivNum(int x, int y);
+
+int main(){
+	int a, b;
+	int i, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> a >> b;
+
+	for(i=1 ; i<=b ; i++){
+		if(commDivNum(a,i) == 1)
+			cnt++;
+	}
+	out << cnt << endl;
+
+	return 0;
+}
+
+int commDivNum(int x, int y){
+	int c, t, i;
+	c = 0;
+	if(x < y)
+		t = x;
+	else
+		t = y;
+	for(i=1 ; i<=t ; i++){
+		if(x % i == 0 && y % i == 0)
+			c++;
+	}
+	return c;
+}

@@ -1,0 +1,68 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+void transit(int x, int d, ofstream &o);
+void print(int q, ofstream &o);
+
+int main(){
+	int n;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	in >> n;
+
+	transit(n, 2, out);
+	transit(n, 8, out);
+	transit(n, 16, out);
+	
+    in.close();
+	out.close();
+
+	return 0;
+}
+
+void transit(int x, int d, ofstream &o){
+	int temp = 1;
+	int quota;
+
+	do{
+		temp *= d;
+	}while(temp <= x);
+
+	do{
+		temp = temp / d;
+		quota = x / temp;
+		print(quota, o);
+		x = x % temp;
+	}while(temp != 1);
+
+	o << "(" << d << ")" << endl;
+}
+
+void print(int q, ofstream &o){
+	switch(q){
+		case 10:
+			o << "A";
+			break;
+		case 11:
+			o << "B";
+			break;
+		case 12:
+			o << "C";
+			break;
+		case 13:
+			o << "D";
+			break;
+		case 14:
+			o << "E";
+			break;
+		case 15:
+			o << "F";
+			break;
+		default:
+			o << q;
+	}
+}

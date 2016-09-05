@@ -1,0 +1,60 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+bool isPrimeNum(int x);
+
+int main(){
+	int cKind, n;
+	int pCnt, max, start, i, p;
+	pCnt = 0; max = 0; start = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> cKind >> n;
+
+	for(i=1 ; i<=n ; i++){
+		if(isPrimeNum(i)){
+			p = i;
+			pCnt++;
+
+			do{
+				if(cKind == 1)
+					p = 2*p + 1;
+				else if(cKind == 2)
+					p = 2*p - 1;
+				if(isPrimeNum(p))
+					pCnt++;
+				else
+					break;
+			}while(true);
+
+			if(pCnt > max){
+				max = pCnt;
+				start = i;
+			}
+			pCnt = 0;
+		}
+	}
+	out << start << " " << max << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+bool isPrimeNum(int x){
+	int c = 0;
+	int k;
+	for(k=1 ; k<=x ; k++){
+		if(x % k == 0)
+			c++;
+	}
+	if(c == 2)
+		return true;
+	else
+		return false;
+}

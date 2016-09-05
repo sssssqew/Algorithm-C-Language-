@@ -1,0 +1,67 @@
+#include <iostream>
+#include <fstream>
+#define m10000 10000
+#define m5000 5000
+#define m1000 1000
+#define m500 500
+#define m100 100
+#define m50 50
+#define m10 10
+using namespace std;
+
+int main(){
+	int n, salary, i, j;
+	int s10000, s5000, s1000, s500, s100, s50, s10;
+	
+	s10000 = 0; s5000 = 0; s1000 = 0; s500 = 0; 
+	s100 = 0; s50 = 0; s10 = 0;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> salary;
+		for(j=1 ; j<=7 ; j++){
+			if(salary >= m10000){
+				s10000 += salary / m10000;
+				salary = salary % m10000;
+			}else if(salary >= m5000){
+				s5000 += salary / m5000;
+				salary = salary % m5000;
+			}else if(salary >= m1000){
+				s1000 += salary / m1000;
+				salary = salary % m1000;
+			}else if(salary >= m500){
+				s500 += salary / m500;
+				salary = salary % m500;
+			}else if(salary >= m100){
+				s100 += salary / m100;
+				salary = salary % m100;
+			}else if(salary >= m50){
+				s50 += salary / m50;
+				salary = salary % m50;
+			}else if(salary >= m10){
+				s10 += salary / m10;
+				salary = salary % m10;
+			}else{
+				break;
+			}
+		}
+	}
+
+	out << s10000 << endl;
+	out << s5000 << endl;
+	out << s1000 << endl;
+	out << s500 << endl;
+	out << s100 << endl;
+	out << s50 << endl;
+	out << s10 << endl;
+	
+    in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string data;
+
+	int i, digit, C1, C2, C3, error;
+	C1 = 0; C2 = 0; C3 = 0;
+	
+	in >> data;
+
+	for(i=0 ; i<data.length() ; i++){
+		digit = data[i] - 48;
+
+		if(i == 0 || i == 2 || i == 4 || i == 6)
+			C1 += digit;
+		if(i == 1 || i == 2 || i == 5 || i == 6)
+			C2 += digit;
+		if(i == 3 || i == 4 || i == 5 || i == 6)
+			C3 += digit;
+	}
+
+	C1 = C1 % 2;
+	C2 = C2 % 2;
+	C3 = C3 % 2;
+
+	error = C3 * 4 + C2 * 2 + C1;
+
+	for(i=0 ; i<data.length() ; i++){
+		digit = data[i] - 48;
+
+		if(error != 0 && i + 1 == error)
+			digit = 1 - digit;
+
+		out << digit;
+	}
+	out << endl;
+
+	return 0;
+}

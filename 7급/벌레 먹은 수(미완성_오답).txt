@@ -1,0 +1,49 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int i, q, r, s, A, B;
+	s = 0;
+	
+	cin >> A >> B;
+
+	for(i=A ; i<=B ; i++){
+		if(i % 1000 == 0){
+			s += i / 1000;
+		}else if(i % 100 == 0){
+			s += i / 100;
+		}else if(i % 10 == 0){
+			s += i / 10;
+		}else{
+			//숫자를 두 자리 단위로 자름 
+			q = i / 100;
+			r = i % 100;
+			//숫자 내부에 0이 존재하는 경우 
+			if(q % 10 == 0 || r % 10 == 0){
+				if(q % 10 == 0){
+					q = q / 10;
+				}
+				if(r % 10 == 0){
+					r = r / 10;
+				}
+				s += q; s += r;
+			}else{
+				if(r / 10 == 0){ //십의 자리에 0이 있는 경우
+					s += q; s += r;
+				}else{
+					s += i;
+				}
+			}
+		}
+	}
+	cout << s << endl;
+
+	return 0;
+}
+

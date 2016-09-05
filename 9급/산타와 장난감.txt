@@ -1,0 +1,42 @@
+#include <iostream>
+#include <fstream>
+#define Q_hour 30
+#define hour2min 60
+using namespace std;
+
+int main(){
+	int h, m, k, n, speed, remain, timeMin;
+	int timeH, timeM;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> h >> m >> k >> n;
+	
+	speed = hour2min / Q_hour;
+	remain = n % 50;
+
+	if(k == 1){
+		if(remain != 0)
+			timeMin = ((n - remain) * 2 + remain) * speed;
+		else
+			timeMin = (n * 2 - 50) * speed;
+	}else if(k == 2){
+		if(remain != 0)
+			timeMin = ((n - remain) * 2 + remain + 50) * speed;
+		else
+			timeMin = (n * 2) * speed;
+	}
+
+	timeMin = h * hour2min + m + timeMin;
+    timeM = timeMin % hour2min;
+	timeH = (timeMin - timeM) / hour2min;
+    out << timeH << " " << timeM << endl;
+				
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

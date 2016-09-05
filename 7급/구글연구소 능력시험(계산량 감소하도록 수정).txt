@@ -1,0 +1,62 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int digitNum(int x, int d);
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int n, i, dCnt, s, digit, q, r;
+	dCnt = 0; s = 0; 
+	digit = 1; //number to find total num within a range
+
+	cin >> n;
+
+	for(i=0 ; i<=n ; i+=100){
+		//digitNum : find the numbers of specific digit
+		dCnt = digitNum(i, digit);
+		s += dCnt * 100 + 20; // 1's : 10, 10's : 10
+	}
+	//100의 자리에 있는 1의 갯수를 
+	//범위에서 벗어난 양만큼 빼줌 
+	n = n % 100;	
+	s = s - (99 - n) * dCnt;
+	
+	q = n / 10;
+	r = n % 10;
+
+	//1의 자리에 있는 1의 갯수를 
+	//범위에서 벗어난 양만큼 빼줌 
+	s = s - (9 - q);
+	if(r < digit)
+		s = s - 1;
+
+	//10의 자리에 있는 1의 갯수를 
+	//범위에서 벗어난 양만큼 조정함 
+	s = s - (9 - r);
+	if(q < digit)
+		s = s - (r + 1);
+	if(q > digit)
+		s = s + (9 - r);
+
+	cout << s << endl;
+
+	return 0;
+}
+
+int digitNum(int x, int d){
+	int r, cnt;
+	cnt = 0;
+	do{
+		r = x % 10;
+		if(r == d)
+			cnt++;
+		x = x / 10;
+	}while(x != 0);
+
+	return cnt;
+}

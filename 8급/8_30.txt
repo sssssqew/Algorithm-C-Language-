@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, j, k, n, e;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> e >> n;
+
+	for(i=1 ; i<=10 ; i+=n){
+		for(j=1 ; j<=9 ; j++){
+			for(k=i ; k<=i+(n-1) ; k++){
+				if(k <= e){
+					out << k << " " << j << " " << j*k << " ";
+				}
+			}
+			out << endl;
+		}
+		out << endl;
+	}
+	
+	return 0;
+}
+

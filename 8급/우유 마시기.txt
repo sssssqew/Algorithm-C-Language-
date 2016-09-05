@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int milkValue, money;
+	int total, temp;
+	total = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> milkValue >> money;
+
+	temp = money / milkValue;
+	total += temp;
+
+	do{
+		total += temp / 3;
+		temp = temp / 3 + temp % 3;
+	}while(temp >= 3);
+
+	out << total << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

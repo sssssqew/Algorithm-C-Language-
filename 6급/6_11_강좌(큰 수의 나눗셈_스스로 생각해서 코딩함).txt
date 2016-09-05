@@ -1,0 +1,98 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 1000
+using namespace std;
+
+//일반적인 나눗셈 과정과 동일하게 설계함 
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	string n1, n2;
+	int i, j, k, f, tmp, carry, sign, cnt;
+	long int quota[len] = {0, }, remain[len] = {0, }, mult[len*11] = {0, };
+
+	in >> n1;
+	in >> n2;
+	
+	//맨 처음 피제수와 제수의 비교를 위하여 제수의 길이만큼 끊어서 배열에 저장함 
+	for(i=0 ; i<n2.size() ; i++) remain[len-n2.size()+i] = n1[i] - '0';
+	for(i=0 ; i<n2.size() ; i++) quota[len-n2.size()+i] = n2[i] - '0';
+	
+	//나눗셈 과정 : 나머지 - 제수 * (0~9) = 나머지 
+	//제수 * (0~9)를 2차원 배열에 저장함 
+	for(i=1 ; i<=10 ; i++){
+		carry = 0;
+		for(j=len-1 ; j>=0 ; j--){
+			tmp = quota[j] * i + carry;
+			carry = tmp / 10;
+			mult[i*len+j] = tmp % 10;
+		}
+	}
+	//몫을 저장할 배열의 초기화 
+	for(i=0 ; i<len ; i++) quota[i] = 0;
+	
+	//몫을 저장할 시작주소 설정함 
+	cnt = len-n1.size()+n2.size()-1;
+	for(i=n2.size() ; i<=n1.size() ; i++){
+		f = 0;
+		//피제수(길이는 제수만큼 끊음)와 제수 * (0~9)를 비교함 
+		//만약 (제수 * j) > 피제수이면 플래그를 표시함 
+		for(j=0 ; j<=10 ; j++){
+			for(k=0 ; k<len ; k++){
+				if(remain[k] > mult[j*len+k]){
+					break;
+				}else if(remain[k] < mult[j*len+k]){
+					f = 1;
+					break;
+				}
+			}
+			//(제수 * j)가 피제수를 초과했으므로 (j-1)을 몫 배열에 저장함 
+			//피제수(or 나머지) - (제수 * (j-1))을 하여 나머지 배열에 저장함 
+			if(f){
+				quota[cnt] = j-1;
+				for(k=len-1 ; k>=0 ; k--){
+					if(remain[k] < mult[(j-1)*len+k]){
+						remain[k] = remain[k] - mult[(j-1)*len+k] + 10;
+						remain[k-1] = remain[k-1] - 1;
+					}else{
+						remain[k] = remain[k] - mult[(j-1)*len+k];
+					}
+				}
+				cnt++;
+				break;
+			}
+		}
+		//나머지 결과에서 일의 자리에 피제수의 다음 숫자를 추가해야 하므로 
+		//왼쪽으로 한칸씩 이동시키고 끝에 다음 피제수 숫자를 삽입함 
+		if(i != n1.size()){
+			sign = 0;
+			for(j=0 ; j<len ; j++){
+				if(remain[j] != 0) sign = 1;
+				if(sign) remain[j-1] = remain[j];
+			}
+			remain[len-1] = n1[i] - '0';
+		}
+	}
+	
+	cout << "몫     = ";
+	sign = 0;
+	for(i=0 ; i<len ; i++){
+		if(quota[i] != 0) sign = 1;
+		if(sign) cout << quota[i];
+	}
+	cout << endl;
+
+	cout << "나머지 = ";
+	sign = 0;
+	for(i=0 ; i<len ; i++){
+		if(remain[i] != 0) sign = 1;
+		if(sign) cout << remain[i];
+	}
+	cout << endl;
+
+	return 0;
+}
+

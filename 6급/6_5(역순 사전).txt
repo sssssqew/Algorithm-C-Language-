@@ -1,0 +1,66 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 20
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	char *dic[20000], *trans[10000], *fdic[20000], *ftrans[10000], *tmp;
+	int ch1, ch2;
+	int mN, tN;
+	int i, j, wlen1, wlen2;
+
+	in >> mN;
+	for(i=0 ; i<mN ; i++){
+		//allocate memory to store words in master file 
+		dic[i] = (char*)malloc(sizeof(char)*len);
+		fdic[i] = dic[i];
+		in >> dic[i];
+	}
+	in >> tN;
+	for(i=0 ; i<tN ; i++){
+		//allocate memory to store words in transaction file 
+		trans[i] = (char*)malloc(sizeof(char)*len);
+		ftrans[i] = trans[i];
+		in >> trans[i];
+
+		for(j=0 ; j<mN ; j++){
+			wlen1 = strlen(trans[i]);
+			wlen2 = strlen(dic[j]);
+			//compare two alphabets from the end of the word 
+			while(wlen1 != 0 && wlen2 != 0){
+				ch1 = *(trans[i]+(wlen1-1));
+				ch2 = *(dic[j]+(wlen2-1));
+				wlen1--; wlen2--;
+				//change two words if transaction word is smaller
+				if(ch1 < ch2){
+					tmp = trans[i];
+					trans[i] = dic[j];
+					dic[j] = tmp;
+					break;
+				//get out to compare with next word 
+				//if transaction word is larger 
+				}else if(ch1 > ch2){
+					break;
+				}
+			}
+		}
+		//insert the largest word at the end of the array in master file 
+		dic[j] = (char*)malloc(sizeof(char)*len);
+		fdic[j] = dic[j];
+		dic[j] = trans[i];
+		mN = mN + 1;
+	}
+	
+	for(i=0 ; i<mN ; i++)
+		out << dic[i] << endl;
+	
+	for(i=0 ; i<mN ; i++) free(fdic[i]);
+	for(i=0 ; i<tN ; i++) free(ftrans[i]);
+
+	return 0;
+}

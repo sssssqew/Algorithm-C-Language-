@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int freq, period, cnt, c, time;
+	int n, f, p, i;
+	c = 0; time = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> freq >> period >> cnt;
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> f >> p;
+		time += p;
+		if(f % freq == 0 && p >= period){
+			c++;
+			if(c == cnt){
+				out << time << endl;
+				break;
+			}
+		}
+	}
+	if(i == n+1)
+		out << 0 << endl;
+
+	return 0;
+}

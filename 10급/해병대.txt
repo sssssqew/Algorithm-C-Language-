@@ -1,0 +1,22 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	int upDown, pushUp;
+    int totalScore;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> upDown >> pushUp;
+
+	totalScore = (upDown + 30) + (pushUp + 50);
+
+
+	out << totalScore;
+
+	return 0;
+}
+	

@@ -1,0 +1,38 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+void Squere(int lv, double* ret);
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int Level;
+	double Number;
+
+	Level = 2;
+	Number = 3.14;
+	Squere(Level, &Number);
+	cout << "3.14 ^ 2 = " << Number << endl;
+
+	Level = 3;
+	Number = 1.414213;
+	Squere(Level, &Number);
+	cout << "1.414213 ^ 3 = " << Number << endl;
+
+	return 0;
+}
+
+void Squere(int lv, double* ret){
+	double temp = 1;
+	int i;
+	for(i=0 ; i<lv ; i++){
+		temp = temp * *ret;
+	}
+	*ret = temp;
+}
+
+

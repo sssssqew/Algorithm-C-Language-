@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int a, b, c, d, e, f, g, h, i;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> a >> b >> c >> d;
+
+	for(e=1 ; e<=9 ; e++){
+		if(e!=a && e!=b && e!=c && e!=d){
+			for(f=1 ; f<=9 ; f++){
+				if(f!=a && f!=b && f!=c && f!=d && f!=e){
+					for(g=1 ; g<=9 ; g++){
+						if(g!=a && g!=b && g!=c && g!=d && g!=e && g!=f){
+							for(h=1 ; h<=9 ; h++){
+								if(h!=a && h!=b && h!=c && h!=d && h!=e && h!=f && h!=g){
+									for(i=1 ; i<=9 ; i++){
+										if(i!=a && i!=b && i!=c && i!=d && i!=e && i!=f && i!=g && i!=h){
+											if(a+b == b+c+d && b+c+d == d+e+f && d+e+f == f+g+h 
+												&& f+g+h == h+i)
+												out << e << " " << f << " " << g << " " << h << " " << i << endl;
+											
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+
+		

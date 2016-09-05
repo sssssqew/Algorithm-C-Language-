@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int n, use, i, j, s;
+	float total_height, t1, t2;
+	float score[1000], height[1000];
+	total_height = 0;
+
+	in >> n;
+	for(i=0 ; i<n ; i++)
+		in >> score[i] >> height[i];
+
+	for(i=0 ; i<n-1 ; i++){
+		s = i;
+		for(j=i+1 ; j<n ; j++){
+			if(score[s] < score[j]) s = j;
+		}
+		t1 = score[i]; score[i] = score[s]; score[s] = t1;
+		t2 = height[i]; height[i] = height[s]; height[s] = t2;
+	}
+	
+	
+	in >> use;
+	for(i=0 ; i<use ; i++)
+		total_height += height[i];
+	out << int(total_height) << endl;
+
+	return 0;
+}
+	

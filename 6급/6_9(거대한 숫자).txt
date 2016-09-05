@@ -1,0 +1,72 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 50
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	string a, b;
+	int i, j, k, n, f, al, bl, id, tmp;
+	int chA, chB;
+	//char 배열로 선언하면 오버플로우 발생함 
+	int c[len];
+
+	b = "22096";
+
+	in >> n;
+	for(i=0 ; i<n ; i++){
+		in >> a;
+		al = a.size(); bl = b.size();
+		//앞에 0을 제거하고 출력하기 위함 
+		f = 0;
+
+		for(j=0 ; j<len ; j++){
+			c[j] = 0;
+		}
+
+		tmp = len;
+		//곱셈 순서에 맞게 한자리씩 곱한 다음 
+		//c 배열의 해당 자리에 저장함(더함)
+		for(j=bl-1 ; j>=0 ; j--){
+			tmp = tmp - 1;
+			chB = b[j] - '0';
+			for(k=al-1 ; k>=0 ; k--){
+				id = tmp - (al-1-k);
+				chA = a[k] - '0';
+				c[id] += chA * chB;
+			}
+		}
+		
+		//곱셈이나 덧셈에 의한 자리올림을 하지 
+		//않았으므로 여기에서 한꺼번에 실행함 
+		for(j=len-1 ; j>=0 ; j--){
+			c[j-1] += c[j] / 10;
+			c[j] = c[j] % 10;
+		}
+		
+		for(j=0 ; j<len ; j++){
+			if(c[j] != 0) f = 1;
+			if(f) out << c[j];
+		}
+		out << endl;
+	}
+
+	return 0;
+}
+
+------------------------------------------------------------
+* 원리 설명
+
+        123
+     x   17
+___________  
+    7 14 21  -> 각 자리순으로 한자리 곱셈을 실행함  
+ 1  2  3
+___________
+ 1  9 17 21  -> 각 결과를 덧셈함 
+___________
+ 2  0  9  1  -> 각 배열에 한 자리수만 저장하고 자리올림을 함 

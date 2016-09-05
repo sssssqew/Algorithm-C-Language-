@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string word;
+	int i, j, n, value, cnt;
+	cnt = 0;
+
+	in >> word;
+	n = atoi(word.c_str());
+
+	for(i=1 ; i<=n ; i++){
+		in >> word;
+		value = 0;
+		for(j=0 ; j<word.length() ; j++){
+			if(word[j] >= 97 && word[j] <= 122)
+				value += word[j] - 96;
+		}
+		if(value == 100)
+			cnt++;
+	}
+	out << cnt << endl;
+
+	return 0;
+}
+

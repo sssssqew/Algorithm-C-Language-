@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int x, y;
+	int px, py;
+	float A, B, C, D, E;
+	float d = 0, length = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> A >> B >> C >> D >> E;
+
+	for(float i=0 ; i<=6.4 ; i+=0.01){
+		x = i * A + B;
+		y = C * sin(D * i) * cos(E * i) + 150;
+
+		if(i != 0){
+			d = sqrt(pow((x - px), 2) + pow((y - py), 2));
+			length += d;
+		}
+
+		px = x;
+		py = y;
+	}
+	length = int(length/10+0.5)*10;
+
+	out << length << endl;
+
+	return 0;
+}
+

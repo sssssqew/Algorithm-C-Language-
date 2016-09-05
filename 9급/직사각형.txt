@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int work;
+	double horizon, vertical, result;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> work;
+	do{
+		in >> horizon >> vertical;
+		if((horizon > 0 && horizon < 10000) && (vertical > 0 && vertical < 10000))
+			break;
+	}while(true);
+
+	if(work == 1)
+		result = horizon * vertical;
+	else if(work == 2)
+		result = 2 * (horizon + vertical);
+	else if(work == 3)
+		result = sqrt(pow(horizon,2) + pow(vertical,2));
+		
+	out.setf(ios::fixed);
+	out.precision(2);
+	out << result << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

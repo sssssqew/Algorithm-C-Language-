@@ -1,0 +1,73 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, n, t, rank;
+	int gold[200], silver[200], bronze[200];
+	string nation[200], s;
+	string suf[4] = {"st", "nd", "rd", "th"};
+
+	in >> n;
+
+	for(i=0 ; i<n ; i++)
+		in >> nation[i] >> gold[i] >> silver[i] >> bronze[i];
+	
+
+	for(i=1 ; i<n ; i++){
+		for(j=i-1 ; j>=0 ; j--){
+			if(gold[j] < gold[j+1]){
+				t = gold[j]; gold[j] = gold[j+1]; gold[j+1] = t;
+				t = silver[j]; silver[j] = silver[j+1]; silver[j+1] = t;
+				t = bronze[j]; bronze[j] = bronze[j+1]; bronze[j+1] = t;
+				s = nation[j]; nation[j] = nation[j+1]; nation[j+1] = s;
+			}else if(gold[j] == gold[j+1]){
+				if(silver[j] < silver[j+1]){
+					t = gold[j]; gold[j] = gold[j+1]; gold[j+1] = t;
+					t = silver[j]; silver[j] = silver[j+1]; silver[j+1] = t;
+					t = bronze[j]; bronze[j] = bronze[j+1]; bronze[j+1] = t;
+					s = nation[j]; nation[j] = nation[j+1]; nation[j+1] = s;
+				}else if(silver[j] == silver[j+1]){
+					if(bronze[j] < bronze[j+1]){
+						t = gold[j]; gold[j] = gold[j+1]; gold[j+1] = t;
+						t = silver[j]; silver[j] = silver[j+1]; silver[j+1] = t;
+						t = bronze[j]; bronze[j] = bronze[j+1]; bronze[j+1] = t;
+						s = nation[j]; nation[j] = nation[j+1]; nation[j+1] = s;
+					}else if(bronze[j] == bronze[j+1]){
+						if(nation[j] > nation[j+1]){
+							t = gold[j]; gold[j] = gold[j+1]; gold[j+1] = t;
+							t = silver[j]; silver[j] = silver[j+1]; silver[j+1] = t;
+							t = bronze[j]; bronze[j] = bronze[j+1]; bronze[j+1] = t;
+							s = nation[j]; nation[j] = nation[j+1]; nation[j+1] = s;
+						}else
+							break;
+					}else
+						break;
+				}else
+					break;
+			}else 
+				break;
+		}
+	}
+
+	for(i=0 ; i<n ; i++){
+		rank = i+1;
+		if(i != 0){
+			if(gold[i] == gold[i-1] && silver[i] == silver[i-1] && bronze[i] == bronze[i-1])
+				rank = i;
+		}
+		if(rank < 4) s = suf[rank-1];
+		else s = suf[3];
+		out << rank << s << " " << nation[i] << " ";
+		out << gold[i] << " " << silver[i] << " " << bronze[i] << endl;
+	}
+
+	return 0;
+}
+
+	
+	

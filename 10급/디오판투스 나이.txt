@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int age = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		age++;
+		if(age%2 == 0 && age%6 == 0 && age%7 == 0 && age%12 == 0)
+			break;
+	}while(age < 200);
+    
+
+	out << age;
+
+	return 0;
+}
+	

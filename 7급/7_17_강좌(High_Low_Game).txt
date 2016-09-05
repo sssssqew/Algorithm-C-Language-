@@ -1,0 +1,43 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+#include <time.h>
+using namespace std;
+
+char lowerCase(char c);
+
+int main(){
+	int i, A, N, x;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	cin >> A;
+
+	srand(time(NULL));
+	N = rand()%(A+1);
+
+	cout << "You must guess the number between 0 and " << A << endl;
+	
+	i = 0;
+	do{
+		cin >> x;
+		if(x > N)
+			cout << "Too High" << endl;
+		else if(x < N)
+			cout << "Too Low" << endl;
+		i++;
+	}while(x != N);
+
+	cout << "You got it in " << i << " tries!!" << endl;
+	
+	return 0;
+}
+
+char lowerCase(char c){
+	if(c >= 65 && c <= 90)
+		return c + 32;
+	else
+		return c;
+}

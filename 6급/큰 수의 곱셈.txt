@@ -1,0 +1,59 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 100
+using namespace std;
+
+void storeNum(char* ar, string n);
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	char a[len] = {0, }, b[len] = {0, }, c[2*len] = {0, };
+	int i, j, alen, blen, clen, t, last, cnt;
+	string num;
+
+	in >> num;
+	storeNum(a, num);
+	alen = num.size();
+
+	for(i=len-alen ; i<len ; i++) cout << int(a[i]);
+	cout << endl;
+
+	in >> num;
+	storeNum(b, num);
+	blen = num.size();
+
+	for(i=len-blen ; i<len ; i++) cout << int(b[i]);
+	cout << endl;
+
+	for(i=len-1 ; i>=len-blen ; i--){
+		for(j=len-1 ; j>=len-alen ; j--){
+			t = a[j] * b[i] + c[i+j];
+			c[i+j-1] = c[i+j-1] + (t/10);
+			c[i+j] = t % 10;
+		}
+	}
+	clen = alen + blen - 1;
+	if(c[i+j+1] != 0) clen = clen + 1;
+
+	last = 2*len-1; cnt = 0;
+	for(i=last-clen ; i<last ; i++){
+		out << int(c[i]);
+		cnt++;
+		if(cnt == 4) break;
+	}
+	out << endl;
+
+	return 0;
+}
+
+void storeNum(char* ar, string n){
+	int i, nlen;
+	nlen = n.size();
+	for(i=0 ; i<nlen ; i++)
+		ar[len-nlen+i] = n[i] - '0';	
+}
+

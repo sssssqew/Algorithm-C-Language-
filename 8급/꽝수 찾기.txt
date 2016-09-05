@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+bool isPrimeNum(int x);
+
+int main(){
+	int n, data;
+	int i, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+	for(i=1 ; i<=n ; i++){
+		in >> data;
+        if(data % 9 == 3)
+			cnt++;
+	}
+	out << cnt << endl;
+	
+	in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, j, n;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(i=1 ; i<=n ; i++){
+		for(j=1 ; j<=2*(n-i) ; j++){
+			out << " ";
+		}
+		for(j=1 ; j<=2*i-1 ; j++){
+			out << i << " ";
+		}
+		out << endl;
+	}
+	
+	for(i=1 ; i<=n-1 ; i++){
+		for(j=1 ; j<=2*i ; j++){
+			out << " ";
+		}
+		for(j=1 ; j<=2*(n-i)-1 ; j++){
+			out << n-i << " ";
+		}
+		out << endl;
+	}
+	return 0;
+}
+

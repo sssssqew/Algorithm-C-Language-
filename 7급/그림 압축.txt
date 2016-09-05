@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string str;
+	int i, ch, n, cnt;
+	ch = 0; cnt = 0;
+
+	in >> str;
+	n = atoi(str.c_str());
+
+	in >> str;
+	for(i=0 ; i<=n ; i++){
+		if(ch != str[i]){
+			if(i != 0){
+				out << cnt << " ";
+			}else{
+				if(str[i] == 'B')
+					out << cnt << " ";
+			}
+
+			ch = str[i];
+			cnt = 0;
+		}
+		if(ch == str[i])
+			cnt++;
+	}
+
+	return 0;
+}

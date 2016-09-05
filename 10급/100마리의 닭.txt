@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+
+#define TOTAL 150
+#define COIN 100
+using namespace std;
+
+int main(){
+	int x, y, z, eq;
+	int maxZ = 0;
+	 
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	x = 0;
+	do{
+		y = 0;
+		do{
+			z = TOTAL - (x + y);
+			if(z%3 == 0 && z > 0 && z < 150){
+				eq = 5 * x + 3 * y + z / 3;
+				if(eq == 100){
+					cout << x << " " << y << " " << z << endl;
+					if(maxZ < z)
+						maxZ = z;
+				}
+			}
+			y++;
+		}while(y < TOTAL);
+		x++;
+	}while(x < TOTAL);
+
+	cout << maxZ << endl;
+	out << maxZ << endl;
+	return 0;
+}

@@ -1,0 +1,86 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+//¼¼±ÕÀü °ÔÀÓ 
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int i, j, k, row, col, size, playNum, germ1, germ2, order;
+	int* board;
+
+	germ1 = 0; germ2 = 0;
+	 
+	in >> size;
+	//allocate memory by the size of board to play 
+	board = (int*)malloc(sizeof(int)*size*size);
+
+	//read the current game progress by file 
+	//count the number of germs of 2 players
+	for(row=0 ; row<size ; row++){
+		for(col=0 ; col<size ; col++){
+			in >> board[row*size+col];
+			if(board[row*size+col] == 1) germ1++;
+			else if(board[row*size+col] == 2) germ2++;
+		}
+	}
+
+	in >> playNum;
+	for(i=0 ; i<playNum ; i++){
+		//tell if the game is over 
+		if(germ1 == 0 || germ2 == 0 || germ1+germ2 == size*size) break;	
+		in >> row >> col;
+		row = row - 1;
+		col = col - 1;
+		//tell who is going to play(turn)
+		order = i % 2;
+
+		//tell if the position to put new germ has other germ 
+		if(board[row*size+col] == 0){
+			//put the germ of player1 or player 2
+			board[row*size+col] = order+1;
+			
+			//count by one germ 
+			if(order+1 == 1) germ1++;
+			else if(order+1 == 2) germ2++;
+							
+			//tell if positions around the play put the germ has germs of other player
+			//if it has germs of other player, change to my germ 
+			for(j=row-1 ; j<=row+1 ; j++){
+				for(k=col-1 ; k<=col+1 ; k++){
+					//tell if j, k get off the board 
+					if((j>=0 && j<size) && (k>=0 && k<size)){
+						if(order+1 == 1){
+							//if other germs is owned by player2
+							if(board[j*size+k] == 2){
+								board[j*size+k] = order+1;
+								germ1++; germ2--;
+							}
+						}
+						else if(order+1 == 2){
+							//if other germs is owned by player1
+							if(board[j*size+k] == 1){
+								board[j*size+k] = order+1;
+								germ2++; germ1--;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	}
+	
+	//decide and print who won the game  
+	if(germ1 == germ2) out << 0 << endl;
+	else if(germ1 > germ2) out << 1 << endl;
+	else if(germ1 < germ2) out << 2 << endl;
+
+	free(board);
+	return 0;
+}
+
+	
+	

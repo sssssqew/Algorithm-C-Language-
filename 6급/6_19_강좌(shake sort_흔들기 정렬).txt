@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int a[29] = {1, 4, 1, 4, 1, 7, 3, 2, 2, 2, 3, 6, 0, 2,
+		4, 4, 9, 2, 6, 4, 6, 2, 8, 2, 8, 3, 1, 6, 2};
+	int n, t, i, s, x, y;
+	n = 29;
+	x = 0 ; y = n - 1;
+
+	while(x < y){
+		//sort to the right
+		for(i=x ; i<y ; i++){
+			if(a[i] > a[i+1]){
+				t = a[i]; a[i] = a[i+1]; a[i+1] = t;
+				s = i;
+			}
+		}
+		//store the position where the value exchanged last time
+		//position where sort ends next time(right end) 
+		y = s;
+		//sort to the left 
+		for(i=y ; i>=x+1 ; i--){
+			if(a[i] < a[i-1]){
+				t = a[i]; a[i] = a[i-1]; a[i-1] = t;
+				s = i;
+			}
+		}
+		//store the position where the value exchanged last time 
+		//position where sort ends next time(left end)
+		x = s;
+	}
+	for(i=0 ; i<n ; i++) cout << a[i] << " ";
+	cout << endl;
+		
+	return 0;
+}
+
+	
+	

@@ -1,0 +1,39 @@
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+void main()
+{
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	int a, b, cnt, n, c, sum;
+	double sum1 = 0;
+
+	in >> a >> b;
+
+	for(int i=a ; i<=b; i++){
+		n=i; sum=0; cnt=0;
+		for(int j=1;j<=7;j++)
+		{
+			c=n/pow(10,7-j);
+
+			if(c==0){
+				sum1 = sum1+sum; 
+				sum=0;
+			}else{
+				sum=sum*pow(10,1)+c;
+			}
+			n=n%(int)pow(10,7-j);
+		}
+		if(c!=0) 
+			sum1=sum1+sum;
+	}
+
+	out.setf(ios::fixed);
+	out.precision(0);
+	out << sum1 << endl;
+
+	in.close();
+	out.close();
+} 

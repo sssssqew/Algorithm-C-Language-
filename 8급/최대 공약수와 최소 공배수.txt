@@ -1,0 +1,52 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int n1, n2, r, gcd, lcm;
+	int temp1, temp2;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n1;
+	in >> n2;
+
+	temp1 = n1;
+	temp2 = n2;
+
+		if(temp1 >= temp2){
+			if(temp2 == 0){
+				gcd = temp1;
+			}else{
+				do{
+					r = temp1 % temp2;
+					temp1 = temp2;
+					temp2 = r;
+				}while(r != 0);
+				gcd = temp1;
+			}
+		}else{
+			if(temp1 == 0){
+				gcd = temp2;
+			}else{
+				do{
+					r = temp2 % temp1;
+					temp2 = temp1;
+					temp1 = r;
+				}while(r != 0);
+				gcd = temp2;
+			}
+		}
+
+		lcm = (n1 * n2) / gcd;
+		
+		out << gcd << endl;
+		out << lcm << endl;
+	
+    in.close();
+	out.close();
+
+	return 0;
+}
+

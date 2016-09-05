@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int Delt, T;
+	double V, D;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> Delt;
+    in >> T;
+
+	V = 331.0 + 0.6 * T;
+	D = V * (double)Delt/2;
+
+	out.setf(ios::fixed);
+	out.precision(0);
+
+	out << D << endl;
+
+	return 0;
+}
+	

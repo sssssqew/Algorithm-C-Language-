@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int n1, n2, i, j, s;
+	s = 0;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n1 >> n2;
+
+	for(i=n1 ; i<=n2 ; i++){
+		for(j=1 ; j<i ; j++){
+			if(i % j == 0)
+				s += j;
+		}
+		if(s == i)
+			break;
+		else 
+			s = 0;
+	}
+	out << s << endl;
+
+	
+    in.close();
+	out.close();
+
+	return 0;
+}
+

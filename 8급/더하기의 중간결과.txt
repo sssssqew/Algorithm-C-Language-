@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#define lo 1
+#define up 9
+using namespace std;
+
+int main(){
+	int a, b, i ,s;
+	s = 0;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> a;
+	in >> b;
+
+	for(i=1 ; i<=a ; i++){
+		s += i;
+		if(i % b == 0)
+			out << s << endl;
+	}
+	
+	out << s << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

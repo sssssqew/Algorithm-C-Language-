@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+#include <time.h>
+using namespace std;
+
+int main(){
+	double A, B, C, D, E, F;
+	double prev, current;
+	int cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> A >> B >> C >> D >> E >> F;
+
+	for(double i=0 ; i<6.4 ; i+=0.01){
+		double x = i * 70;
+		double ys = A * sin(B*i-C);
+		double yc = D * cos(E*i+F);
+
+		current = ys - yc;
+		if(i != 0 && prev * current < 0){
+			cout << prev << " " << current << endl;
+			cnt++;
+		}
+
+		prev = current;
+	}
+	out << cnt << endl;
+
+	return 0;
+}
+

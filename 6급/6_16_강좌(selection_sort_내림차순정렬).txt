@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int a[100];
+	int i, j, temp;
+	int n = 100;
+
+	for(i=0 ; i<n ; i++)
+		a[i] = (rand() % n)+1;
+	for(i=0 ; i<n-1 ; i++){
+		for(j=i+1 ; j<n ; j++){
+			if(a[i] < a[j]){
+				temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+	}
+	cout << "sorted data---> ";
+	for(i=0 ; i<n ; i++)
+		cout << a[i] << " ";
+	cout << endl;
+
+	return 0;
+}
+	

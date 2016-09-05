@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int num;
+	int quota, remainder;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> num;
+		if(num >= 1 && num <= 30)
+			break;
+	}while(true);
+
+	quota = (num * 9) / 10;
+	remainder = (num * 9) % 10;
+
+	out << quota + remainder << endl;
+
+	in.close();
+	out.close();
+
+	return 0;
+}

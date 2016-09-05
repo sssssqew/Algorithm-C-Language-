@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <String>
+using namespace std;
+
+int main(){
+	string myLetter, letter;
+	int n, cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> myLetter;
+	in >> n;
+
+	int i=0;
+	do{
+		in >> letter;
+		if(myLetter < letter){
+				cnt++;
+				cout << letter << endl;
+		}
+		i++;
+	}while(i < n);
+
+	out << cnt << endl;
+	
+	in.close();
+	out.close();
+
+	return 0;
+}

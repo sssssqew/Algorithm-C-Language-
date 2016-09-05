@@ -1,0 +1,53 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int lowCase(int ch);
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string str, word, tmp;
+	int i, j, k, n, ch, cnt;
+	cnt = 0; 
+
+	getline(in, str);
+	getline(in, word);
+	n = atoi(word.c_str());
+
+	for(i=1 ; i<=n ; i++){
+		getline(in, word);
+		tmp = word;
+		ch = 0; 
+		for(j=0 ; j<str.length() ; j++){
+			if(lowCase(str[j]) >= 97 && lowCase(str[j] <= 122)){
+				for(k=0 ; k<word.length() ; k++){
+					if(lowCase(str[j]) == lowCase(word[k])){
+						word[k] = ' ';
+						ch++;
+						//글자를 찾았으면 다음 글자로 넘어가야 함 
+						//문장의 글자를 한번만 사용하기 위함 
+						break;
+					}
+				}
+				if(ch == word.length()){
+					cout << tmp << endl;
+					cnt++;
+					break;
+				}
+			}
+		}
+	}
+	out << cnt << endl;
+
+	return 0;
+}
+
+int lowCase(int ch){
+	if(ch >= 65 && ch <= 90)
+		ch = ch + 32;
+	return ch;
+}

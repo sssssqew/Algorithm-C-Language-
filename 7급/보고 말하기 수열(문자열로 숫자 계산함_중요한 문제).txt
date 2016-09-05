@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	string seq, sub;
+	int i, j, tmp, digit, cnt;
+	tmp = 0;
+
+	in >> seq;
+
+	for(i=1 ; i<5 ; i++){
+		for(j=0 ; j<=seq.length() ; j++){
+			if(j != seq.length())
+				digit = seq[j] - 48;
+			else
+				digit = 0;
+
+			if(tmp != digit){
+				if(j != 0){
+					//문자열 크기 선언 없이 
+					//문자열 연결하기 된다 
+					sub += cnt + 48;
+					sub += tmp + 48;
+				}
+				tmp = digit;
+				cnt = 0;
+			}
+			if(tmp == digit && tmp != 0)
+				cnt++;
+		}
+		
+		seq = sub;
+		sub = "";
+	}
+	out << seq << endl;
+	
+	
+
+	return 0;
+}

@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+int main(){
+	int cPoint, changeW, background;
+	double det;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	do{
+		in >> cPoint >> changeW >> background;
+		if((cPoint >= 1 && cPoint <= 1000) && (changeW >= -100) && (background > 0 && background <= 10000))
+			break;
+	}while(true);
+
+	det = (double)background/cPoint;
+
+	if(abs(changeW) >= det){
+		if(changeW > 0)
+			out << 1 << endl;
+		else if(changeW < 0)
+			out << -1 << endl;
+	}else{
+		out << 0 << endl;
+	}
+
+	in.close();
+	out.close();
+
+	return 0;
+}
+

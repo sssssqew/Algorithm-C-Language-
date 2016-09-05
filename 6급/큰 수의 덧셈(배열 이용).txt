@@ -1,0 +1,66 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+#define len 10001
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	string a, b;
+	int c[len] = {0, } ;
+	int aNum, bNum, tmp;
+	int idxA, idxB, i, f, w;
+	int result = 0, cnt = 0;
+
+	in >> a;
+	in >> b;
+
+	f = 0;
+	idxA = a.size();
+	idxB = b.size();
+	tmp = len;
+
+	//자리수에 맞춰서 더하기만 함(자리올림 무시)
+	do{
+		idxA--;
+		idxB--;
+		tmp--;
+
+		if(idxA >= 0)
+			aNum = a[idxA] - '0';
+		else
+			aNum = 0;
+
+		if(idxB >= 0)
+			bNum = b[idxB] - '0';
+		else
+			bNum = 0;
+
+		c[tmp] = aNum + bNum;
+	}while(idxA >= 0 || idxB >= 0);
+
+	//자리올림 실행함 
+	for(i=len-1; i>=0 ; i--){
+		c[i-1] += c[i] / 10;
+		c[i] = c[i] % 10;
+	}
+	w = 1000;
+	for(i=0 ; i<len ; i++){
+		if(c[i] != 0) f = 1;
+		
+		if(f){
+			result += w * c[i];
+			w = w / 10;
+			cnt++;
+		}
+		if(cnt == 4) break;
+		
+	}
+	out << result << endl;
+
+	return 0;
+}
+

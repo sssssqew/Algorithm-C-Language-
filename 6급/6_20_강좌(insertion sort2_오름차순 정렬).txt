@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	//-999 : 최소값 0과 비교하기 위한 임의의 값(센트리)
+	int a[13] = {-999, 10, 1, 1, 8, 5, 8, 2, 5, 3, 0, 7, 4};
+	int n, i, t, x;
+	n = 12;
+
+	for(i=2 ; i<n+1 ; i++){
+		t = a[i]; 
+		x = i-1;
+		while(a[x] > t){
+			a[x+1] = a[x];
+			x--;
+		}
+		a[x+1] = t;
+	}
+	for(i=1 ; i<n+1 ; i++)
+		cout << a[i] << " ";
+	cout << endl;
+	return 0;
+}
+
+	
+	

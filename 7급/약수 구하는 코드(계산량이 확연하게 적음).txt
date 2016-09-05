@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <math.h>
+using namespace std;
+
+int main(){
+	int n, i, cnt;
+	cnt = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	cin >> n;
+	cout << "--------------------------------" << endl;
+	//n=2046 일때 원래 계산량 2046번 또는 절반(1023)
+	//아래와 같이 짜면 46번만 계산하면 약수계산 완료 
+	//숫자가 클수록 확연한 계산량과 속도 차이 발생 
+	i = 1;
+	while(i <= n/i){
+		if(n % i == 0){
+			cout.width(10);
+			cout << i;
+			cout << "    ";
+			cout.width(10);
+			cout << n/i << endl;
+			cnt += 2;
+		}
+		i++;
+	}
+
+	cout << "--------------------------------" << endl;
+	cout << "계산량 : " << i << endl;
+	cout << "약수 갯수 : " << cnt << endl;
+
+	return 0;
+}

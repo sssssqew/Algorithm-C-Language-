@@ -1,0 +1,210 @@
+#include <iostream>
+#include <fstream>
+#define PeopleNum 4 
+using namespace std;
+
+int main()
+{
+	int hiker[PeopleNum];
+	int i, j;
+	int minGoTime = 0, GoTime;
+    int mini, minj;
+	int mini2, minj2;
+	int last;
+	int minTotalTime = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+ 
+	hiker[0] = 5; hiker[1] = 1; hiker[2] = 2; hiker[3] = 10; 
+	minGoTime = hiker[3]; //max 값으로 지정 
+
+    i = 0;
+	do{
+		j = i + 1;
+		do{
+			if(hiker[i] < hiker[j]){
+				GoTime = hiker[j];
+			}else{
+				GoTime = hiker[i];
+			}
+			if(minGoTime > GoTime){
+					minGoTime = GoTime;
+					mini = i;
+					minj = j;
+			}
+			j++;
+		}while(j < 4);
+		i++;
+	}while(i < 4);
+    
+	minTotalTime += minGoTime;
+    minGoTime = hiker[3];//max 값으로 지정 
+
+	if(hiker[mini] < hiker[minj]){
+		minTotalTime += hiker[mini];
+		i = 0;
+		do{
+			j = i + 1;
+			do{
+				if(i != minj && j != minj){
+                    if(hiker[i] < hiker[j]){
+				        GoTime = hiker[j];
+					}else{
+				        GoTime = hiker[i];
+					}
+					if(minGoTime > GoTime){
+						minGoTime = GoTime;
+						mini2 = i;
+					    minj2 = j;
+					}
+				}
+				j++;
+			}while(j < 4);
+			i++;
+		}while(i < 4);
+
+		minTotalTime += minGoTime;
+        if(hiker[mini2] < hiker[minj2]){
+			minGoTime = hiker[mini2];
+			if(minGoTime > hiker[minj]){
+				minTotalTime += hiker[minj];
+				i = 0;
+				do{
+					if(i != minj && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[minj])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[minj];
+			}else{
+				minTotalTime += minGoTime;
+				i = 0;
+				do{
+					if(i != minj && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[mini2])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[mini2];
+			}
+		}else{
+			minGoTime = hiker[minj2];
+			if(minGoTime > hiker[minj]){
+				minTotalTime += hiker[minj];
+				i = 0;
+				do{
+					if(i != minj && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[minj])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[minj];
+			}else{
+				minTotalTime += minGoTime;
+				i = 0;
+				do{
+					if(i != minj && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[minj2])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[minj2];
+			}
+		}
+
+	}else{
+		minTotalTime += hiker[minj];
+		i = 0;
+		do{
+			j = i + 1;
+			do{
+				if(i != mini && j != mini){
+                    if(hiker[i] < hiker[j]){
+				        GoTime = hiker[j];
+					}else{
+				        GoTime = hiker[i];
+					}
+					if(minGoTime > GoTime){
+						minGoTime = GoTime;
+						mini2 = i;
+					    minj2 = j;
+					}
+				}
+				j++;
+			}while(j < 4);
+			i++;
+		}while(i < 4);
+
+		minTotalTime += minGoTime;
+        if(hiker[mini2] < hiker[minj2]){
+			minGoTime = hiker[mini2];
+			if(minGoTime > hiker[mini]){
+				minTotalTime += hiker[mini];
+				i = 0;
+				do{
+					if(i != mini && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[mini])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[mini];
+			}else{
+				minTotalTime += minGoTime;
+				i = 0;
+				do{
+					if(i != mini && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[mini2])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[mini2];
+			}
+		}else{
+			minGoTime = hiker[minj2];
+			if(minGoTime > hiker[mini]){
+				minTotalTime += hiker[mini];
+				i = 0;
+				do{
+					if(i != mini && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[mini])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[mini];
+			}else{
+				minTotalTime += minGoTime;
+				i = 0;
+				do{
+					if(i != mini && i != mini2 && i != minj2)
+						last = i;
+					i++;
+				}while(i < 4);
+				if(hiker[last] > hiker[minj2])
+					minTotalTime += hiker[last];
+				else
+					minTotalTime += hiker[minj2];
+			}
+		}
+		
+	}
+
+	out << minTotalTime << endl;
+    
+	return 0;
+}
+	

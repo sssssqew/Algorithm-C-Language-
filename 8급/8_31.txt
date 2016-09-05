@@ -1,0 +1,36 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main(){
+	int i, j;
+	int h, n;
+	int earth, sky;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> h >> n;
+
+	for(i=1 ; i<=n ; i++){
+		in >> earth >> sky;
+
+		if(earth + sky >= h){
+			for(j=1 ; j<=h ; j++)
+				out << "=";
+		}else{
+			for(j=1 ; j<=earth ; j++)
+				out << ">";
+			for(j=1 ; j<=h-(earth+sky) ; j++)
+				out << ".";
+			for(j=1 ; j<=sky ; j++)
+				out << "<";
+		}
+		out << endl;
+	}
+	
+	
+	return 0;
+}
+

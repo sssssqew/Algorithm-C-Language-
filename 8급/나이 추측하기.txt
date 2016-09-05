@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main(){
+	int period, future, i;
+	double amount;
+	
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> amount;
+	in >> period;
+	in >> future;
+
+	for(i=0 ; i<future ; i+=period){
+		amount = amount / 2;
+	}
+	
+	out << int(amount) << endl;
+
+    in.close();
+	out.close();
+
+	return 0;
+}
+

@@ -1,0 +1,52 @@
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+using namespace std;
+
+int main(){
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	
+	int* magic;
+	int i, n, row, col, f, val;
+	row = 0; col = -1; f = 0;
+
+	in >> n;
+
+	magic = (int*)calloc(n*n, sizeof(int));
+
+	for(i=1 ; i<=n*n ; i++){
+		if(f==0) col++;
+		else if(f==1) row++;
+		else if(f==2) col--;
+		else if(f==3) row--;
+
+		val = magic[row*n+col];
+		if(val != 0 || row == n || col == n){
+			if(f==0) col--;
+			else if(f==1) row--;
+			else if(f==2) col++;
+			else if(f==3) row++;
+
+			f = (f + 1) % 4;
+			if(f==0) col++;
+			else if(f==1) row++;
+			else if(f==2) col--;
+			else if(f==3) row--;
+			val = magic[row*n+col];
+		}
+		if(val == 0) magic[row*n+col] = i;	
+	}
+
+	for(row=0 ; row<n ; row++){
+		for(col=0 ; col<n ; col++){
+			out.width(3);
+			out << magic[row*n+col] << " ";
+		}
+		out << endl;
+	}
+	
+	free(magic);
+	return 0;
+}

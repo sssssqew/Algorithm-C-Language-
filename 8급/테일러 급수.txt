@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main(){
+	int n, p = 1;
+	double pi = 0;
+
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+
+	in >> n;
+
+	for(int i = 1;i <= n;i++){
+		pi += p * (double)4/(2 * i - 1);
+		p *= -1;
+	}
+	out.setf(ios::fixed);
+	out.precision(8);
+	out << pi << endl;
+
+
+
+	return 0;
+}
+
+	
+   
+
+
+
+
+
